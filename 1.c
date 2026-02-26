@@ -1,7 +1,8 @@
 #include <stdio.h>
 
-int function(){
-  return 4;
+int function(int d){
+  int r = 4 + d;
+  return r;
 }
 
 int main(){
@@ -15,8 +16,7 @@ int main(){
   
   int f =  function(d);
   
-  int r = f + d;
-  printf("\nThe result is %d", r); // 16
+  printf("\nThe result is %d", f); // 16
 
   return 0;
 }
