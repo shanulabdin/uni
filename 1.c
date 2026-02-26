@@ -2,7 +2,7 @@
 
 int function(int d){
   int r = 4 + d;
-  return r;
+  printf("\nThe result is %d", r); // 20
 }
 
 int main(){
@@ -12,11 +12,7 @@ int main(){
   c= a - b;
   d= c + 8;
 
-  printf("The result is %d", d); // 16
-  
-  int f =  function(d);
-  
-  printf("\nThe result is %d", f); // 16
+  function(d);
 
   return 0;
 }
