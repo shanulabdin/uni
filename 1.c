@@ -6,13 +6,9 @@ int function(int d){
 }
 
 int main(){
-  int a, b, c, d;
-  a= 16;
-  b= 8;
-  c= a - b;
-  d= c + 8;
+  int a = 10;
 
-  function(d);
+  function(a);
 
   return 0;
 }
