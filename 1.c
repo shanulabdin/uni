@@ -6,9 +6,9 @@ int function(int d){
 }
 
 int main(){
-  int a = 10;
+  int a = 10, b = 20;
 
-  printf("\nThe result is %d", function(a));
+  printf("\nThe result is %d", function(a + b));
 
   return 0;
 }
