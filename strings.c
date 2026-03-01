@@ -5,9 +5,10 @@ char* string(){
 }
 
 int main(){
-  char str[4] = "meow";
+  char* str;
+  str = string();
+  
   printf("%s\n", str);
-  printf("%s\n", string());
 
   return 0;
 }
