@@ -5,6 +5,8 @@ char* string(){
 }
 
 int main(){
+  char str[4] = "meow";
+  printf("%s\n", str);
   printf("%s\n", string());
 
   return 0;
