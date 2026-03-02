@@ -1,7 +1,8 @@
 #include <stdio.h>
 
 char* string(){
-  return "hello";
+  char* str = "Hello World!";
+  return str;
 }
 
 int main(){
@@ -9,6 +10,7 @@ int main(){
   str = string();
   
   printf("%s\n", str);
+  printf("%s", str); 
 
   return 0;
 }
