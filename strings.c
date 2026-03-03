@@ -1,15 +1,13 @@
 #include <stdio.h>
 
 char* string(){
-  char* str = "Hello World!";
+  char* str = "This is a String!";
   return str;
 }
 
 int main(){
-  char* str;
-  str = string();
+  char* str = string();
   
-  printf("%s\n", str);
   printf("%s", str); 
 
   return 0;
