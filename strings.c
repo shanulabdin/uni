@@ -5,10 +5,17 @@ char* string(){
   return str;
 }
 
+int number(){
+  int num = 10;
+  return num;
+}
+
 int main(){
   char* str = string();
-  
-  printf("%s", str); 
+  int num = number();
+
+  printf("%s\n", str);
+  printf("This is an integer: %d\n", num);
 
   return 0;
 }
