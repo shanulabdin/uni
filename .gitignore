@@ -1,6 +1,8 @@
-strings.exe
-.vscode
-strings.ilk
-strings.obj
-strings.pdb
+.vscode/
+# Ignore common build artifacts and intermediate files
+*.exe
+*.ilk
+*.obj
+*.pdb
+# Specific MSVC debug DB (explicit, though covered by *.pdb)
 vc140.pdb
