@@ -77,3 +77,32 @@ int main() {
 
     return 0;
 }
+
+#include <stdio.h>
+
+int main() {
+    char letter;
+    printf("Write a letter: ");
+    scanf("%c", &letter);
+    
+    switch(letter){
+        case 'a':
+            printf("%c is a Vowel.", letter);
+            break;
+        case 'e':
+            printf("%c is a Vowel.", letter);
+            break;
+        case 'i':
+            printf("%c is a Vowel.", letter);
+            break;
+        case 'o':
+            printf("%c is a Vowel.", letter);
+            break;
+        case 'u':
+            printf("%c is a Vowel.", letter);
+            break;
+        default:
+            printf("%c is a Consonant.", letter);
+    }
+    return 0;
+}
