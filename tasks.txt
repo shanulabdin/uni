@@ -1,0 +1,15 @@
+1. Write a program to input three integers and find the largest among them using nested if-else statements.
+
+2.Write a program that inputs a student's marks and prints the grade based on the following criteria:
+Marks >= 90: Grade A
+Marks >= 80: Grade B
+Marks >= 70: Grade C
+Marks >= 60: Grade D
+Marks < 60: Grade F
+
+        Use cascaded if-else statements.
+
+
+3. Write a C program that asks the user for their age and uses an if-else statement to check if they are eligible to vote (18 years or older). Print a message indicating eligibility.
+
+4. Write a program that takes a character input from the user and uses a switch-case to check if the letter is a vowel (a, e, i, o, u). If it’s a vowel, print "Vowel"; otherwise, print "Consonant."
