@@ -15,14 +15,16 @@ int main()
 	}
 	return 0;
 }
+
 #include <stdio.h>
+#include <ctype.h>
 
 int main() {
     char guess;
     printf("Guess the first letter: ");
     scanf("%c", &guess);
     
-    if(guess == 'N' || guess == 'n')
+    if(toupper(guess) == 'N')
     {
         printf("Right guess.");   
     } 
