@@ -62,3 +62,19 @@ int main() {
 
     return 0;
 }
+
+int main() {
+    int age;
+    printf("Enter your Age: \t");
+    scanf("%d", &age);
+    
+    if (age >= 18)
+    {
+        printf("You can Vote.");
+    } else 
+    {
+        printf("You can NOT Vote.");
+    }
+
+    return 0;
+}
