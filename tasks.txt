@@ -6,7 +6,6 @@ Marks >= 80: Grade B
 Marks >= 70: Grade C
 Marks >= 60: Grade D
 Marks < 60: Grade F
-
         Use cascaded if-else statements.
 
 
