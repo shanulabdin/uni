@@ -10,21 +10,7 @@ int main()
   printf("Enter 2nd Number: ");
   scanf("%d", &b);
 
-  if(a % 2 == 0)
-  {
-    if(b % 2 == 0){
-      printf("%d and %d are both Even\n", a, b);
-    } else {
-      printf("%d is Even and %d is Odd\n", a, b);
-    }
-  } else
-  {
-    if(b % 2 == 0){
-      printf("%d is Even and %d is Odd\n", b, a);
-    } else {
-      printf("%d and %d are both Odd\n", a, b);
-    }
-  }
+  printf("%d is %s and %d is %s\n", a, (a %2==0)? "Even":"Odd", b, (b %2==0)? "Even":"Odd");
 
   return 0;
 }
