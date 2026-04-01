@@ -1,0 +1,7 @@
+Write a C program that asks the user for their age and uses an if-else statement to check if they are eligible to vote (18 years or older). Print a message indicating eligibility.
+Write a program that takes a character input from the user and uses a switch-case to check if the letter is a vowel (a, e, i, o, u). If it’s a vowel, print "Vowel"; otherwise, print "Consonant."
+Write a program that asks the user to choose a conversion type:
+1: Kilometers to Miles
+2: Meters to Feet
+3: Centimeters to Inches
+Based on the user’s choice, use a switch-case to perform the selected conversion and display the result.
