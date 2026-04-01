@@ -2,7 +2,10 @@
 
 int main()
 {
-  int choice = 9;
+  int choice;
+
+  printf("Enter your choice: ");
+  scanf("%d", &choice);
 
   switch(choice)
   {
