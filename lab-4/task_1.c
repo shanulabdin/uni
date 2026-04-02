@@ -4,9 +4,9 @@ int main()
   int choice;
   float input, converted;
 
-  printf("1. For Kilometers to Miles, press 1: \n");
-  printf("2. Meters to Feet, Press 2: \n");
-  printf("3. Centimeters to Inches, Press 3: \n");
+  printf("1. For Kilometers to Miles, press 1.\n");
+  printf("2. Meters to Feet, Press 2.\n");
+  printf("3. Centimeters to Inches, Press 3.\n");
   printf("Choose conversion type: ");
 
   scanf("%d", &choice);
@@ -14,7 +14,7 @@ int main()
   switch (choice)
   {
   case 1:
-    printf("User chose Kilometers to Miles: 1: \n");
+    printf("\nUser chose Kilometers to Miles. \n");
     printf("enter your value in Kilometers: ");
     scanf("%f", &input);
 
@@ -23,7 +23,7 @@ int main()
     printf("%0.2f Kilometers is equal to %0.2f Miles.\n", input, converted);
     break;
   case 2:
-    printf("User chose Meters to Feet: 2: \n");
+    printf("\nUser chose Meters to Feet. \n");
     printf("enter your value in Meters: ");
     scanf("%f", &input);
 
@@ -31,7 +31,7 @@ int main()
     printf("%0.2f Meters is equal to %0.2f Feet.\n", input, converted);
     break;
   case 3:
-    printf("Centimeters to Inches: 3: \n");
+    printf("\nUser chose Centimeters to Inches. \n");
     printf("enter your value in Centimeters: ");
     scanf("%f", &input);
 
