@@ -17,32 +17,14 @@ int main()
 
   float average = (sub_1 + sub_2 + sub_3 + sub_4 + sub_5) / 5;
 
-  if (average >= 85)
-  {
-    printf("Grade A.");
-    printf("Scholarship Eligible.");
-  }
-  else if (average >= 70 && average < 84)
-  {
-    printf("Grade B.");
-  }
-  else if (average >= 50 && average < 69)
-  {
-    printf("Grade C.");
-  }
-  else if (average >= 40 && average < 54)
-  {
-    printf("Grade D.");
-  }
-  else
-  {
-    printf("Grade F.");
-  }
+  printf("%s", 
+    (average >= 85) ? "Grade A." :
+    (average >= 70 && average < 84) ? "Grade B." :
+    (average >= 50 && average < 69) ? "Grade C." :
+    (average >= 40 && average < 54) ? "Grade D." : "Grade F."
+  );
 
-  if (average >= 80)
-  {
-    printf("\nScholarship Eligible.");
-  }
+  printf("%s", (average >= 80) ? "\nScholarship Eligible." : "");
 
   return 0;
 }
