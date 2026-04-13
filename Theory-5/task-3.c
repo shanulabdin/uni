@@ -10,13 +10,12 @@ int main()
     printf("\nEnter a number: ");
     scanf("%d", &num);
     sum = num + sum;
+    printf("Sum = %d", sum);
 
-    printf("Do you want to enter another number? Y/N: ");
+    printf("\nDo you want to enter another number? Y/N: ");
     scanf(" %c", &ans);
 
     i++;
-
-    printf("Sum = %d", sum);
   }
 
   return 0;
