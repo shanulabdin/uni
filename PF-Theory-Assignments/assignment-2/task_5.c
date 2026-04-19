@@ -1,12 +1,12 @@
 #include <stdio.h>
-#include <string.h> // Include for strcmp function
+#include <string.h> 
 
 int main()
 {
   char pass[6] = "hello";
   char input[20];
 
-  while (1) // Infinite loop
+  while (1) 
   {
     printf("Enter your password: ");
     scanf("%s", input);
@@ -14,7 +14,7 @@ int main()
     if (strcmp(input, pass) == 0)
     {
       printf("Correct Password.\n");
-      break; // Exit the loop when the password is correct
+      break;
     }
     else
     {
