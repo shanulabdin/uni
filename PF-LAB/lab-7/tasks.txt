@@ -1,0 +1,13 @@
+1.	Write a C program to store the temperatures recorded over 7 days in an array. Calculate and display the average temperature of the week. Also, find and display the highest and lowest temperatures recorded.
+
+2.	Write a C program that takes an array of integers as input and outputs the array in reverse order. The program should work for arrays of any size up to 100 elements.
+
+3.	Write a C program that takes an array of integers and its size as inputs, and sorts the array in ascending order using the Bubble Sort algorithm. Display the sorted array in the main function.
+
+
+home tasks:
+1)	Write a program to record the temperatures (in Celsius) for a week (7 days). Store these temperatures in an array and then calculate and display the average temperature for the week.
+
+2)	Develop a program that stores the grades of 5 students in an array. After storing the grades, calculate and display the highest grade and the average grade of the students.
+
+3)	Write a C program that takes an array of integers and its size as inputs, and sorts the array in descending order using the Bubble Sort algorithm. Display the sorted array in the main function.
