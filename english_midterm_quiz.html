@@ -525,294 +525,301 @@
 
 <script>
 const questions = [
-  // TENSES (Q1–14)
+  // TENSES (Q1–13)
   {
     cat: "Tenses",
-    q: "She <span class='highlight'>will have been working</span> for ten hours by midnight. — What tense is this?",
-    opts: ["Future Perfect", "Future Continuous", "Future Perfect Continuous", "Present Perfect Continuous"],
+    q: "By the time she arrives, I <span class='highlight'>will have cooked</span> dinner. — What tense is the highlighted verb?",
+    opts: ["Future Continuous", "Future Indefinite", "Future Perfect", "Future Perfect Continuous"],
     ans: 2,
-    exp: "<strong>Future Perfect Continuous</strong> = will have been + V-ing. It describes an action that will still be in progress at a specific future point. Signal: 'by midnight'."
+    exp: "<strong>Future Perfect</strong> = will have + V3. It expresses an action that will be completed before a specific future moment. Signal phrase: 'by the time she arrives'."
   },
   {
     cat: "Tenses",
-    q: "They <span class='highlight'>had already started</span> cooking when we arrived. — Which event happened first?",
-    opts: ["We arrived", "They started cooking", "Both happened simultaneously", "Cannot be determined"],
+    q: "Which sentence is in the <strong>Past Continuous</strong> tense?",
+    opts: ["She had eaten before he came.", "She was eating when he called.", "She ate quickly.", "She has eaten already."],
     ans: 1,
-    exp: "<strong>Past Perfect</strong> (had started) always marks the earlier of two past events. They started cooking BEFORE we arrived. The simple past ('arrived') marks the more recent event."
+    exp: "<strong>Past Continuous</strong> = was/were + V-ing. 'She was eating when he called' shows an ongoing past action interrupted by another past event (he called)."
   },
   {
     cat: "Tenses",
-    q: "Which sentence correctly uses the <strong>Future Continuous</strong> tense?",
-    opts: ["She will finish her work.", "She will be finishing her work at noon.", "She has been finishing her work.", "She finished her work."],
+    q: "'We <span class='highlight'>have not seen</span> her today.' — The word 'today' here suggests:",
+    opts: ["The day is over, so Simple Past is needed", "The day is still ongoing — Present Perfect is correct", "Future tense should be used", "Past Perfect should be used"],
     ans: 1,
-    exp: "<strong>Future Continuous</strong> = will be + V-ing. It describes an action that will be in progress at a specific future time. E.g., 'She will be working at noon' means at noon, the action is ongoing."
+    exp: "Present Perfect is used because <strong>'today' is an unfinished period</strong> — the day is not yet over. If the day had ended, Simple Past ('We did not see her today') would be more natural."
   },
   {
     cat: "Tenses",
-    q: "People <span class='highlight'>lived</span> in caves a long time ago. — What kind of time reference does this Simple Past use?",
-    opts: ["A definite point in time", "An indefinite point in time", "A future time", "No time reference"],
+    q: "Select the correct <strong>Past Perfect Continuous</strong> sentence:",
+    opts: ["She has been working all day.", "She had been working for three hours when the power cut.", "She was working when I arrived.", "She will have been working by noon."],
     ans: 1,
-    exp: "Simple Past can be used with <strong>indefinite time expressions</strong> like 'a long time ago', 'the other day', 'ages ago'. A definite reference would be 'last week' or 'in 1990'."
+    exp: "<strong>Past Perfect Continuous</strong> = had + been + V-ing. It emphasizes the duration of an action before another past event. 'For three hours' signals duration; 'when the power cut' is the interrupting past event."
   },
   {
     cat: "Tenses",
-    q: "'We <span class='highlight'>have visited</span> Portugal several times.' — This Present Perfect expresses:",
-    opts: ["An action completed at a specific time in the past", "A repeated action in an unspecified period between the past and now", "An action happening right now", "A future plan"],
+    q: "I <span class='highlight'>lived</span> in Fiji in 1976. — This Simple Past sentence uses:",
+    opts: ["An indefinite time reference", "A definite time reference", "No time reference", "A future time reference"],
     ans: 1,
-    exp: "Present Perfect is used for <strong>repeated actions in an unspecified period</strong>. 'Several times' signals repetition, but no specific date is given. If a date were given (e.g., 'in 2019'), simple past would be required."
+    exp: "Simple Past with a <strong>definite time reference</strong> ('in 1976'). Definite references include: last week, yesterday, in 1990, six weeks ago. These always require Simple Past, never Present Perfect."
   },
   {
     cat: "Tenses",
-    q: "Which auxiliary verb is used in <strong>Present Perfect</strong> with a third-person singular subject (he/she/it)?",
-    opts: ["Have", "Had", "Has", "Will have"],
+    q: "Which auxiliary is used in <strong>Future Continuous</strong> tense?",
+    opts: ["Will have", "Will be", "Shall have been", "Has been"],
+    ans: 1,
+    exp: "<strong>Future Continuous</strong> = will be + V-ing. E.g., 'She will be doing this work at noon.' It describes an action in progress at a specific future time."
+  },
+  {
+    cat: "Tenses",
+    q: "'It <span class='highlight'>has rained</span> a lot this year.' — Why is Present Perfect used here?",
+    opts: ["Because the exact date of rain is known", "Because 'this year' is still an unfinished period", "Because it describes a future possibility", "Because the rain is a habitual action"],
+    ans: 1,
+    exp: "'This year' is an <strong>unfinished period</strong> — the year is not yet over. Present Perfect is used for actions during a period that has not ended. Compare: 'It rained a lot last year' (finished period → Simple Past)."
+  },
+  {
+    cat: "Tenses",
+    q: "Which sentence correctly uses <strong>Present Perfect</strong> to describe a very recent action?",
+    opts: ["She just finished her work.", "She has just finished her work.", "She was just finishing her work.", "She had just finished her work."],
+    ans: 1,
+    exp: "<strong>Present Perfect + 'just'</strong> expresses an action completed in the very recent past. 'Just' always sits between have/has and the past participle. E.g., 'I have just eaten.' / 'He has just left.'"
+  },
+  {
+    cat: "Tenses",
+    q: "John Cabot <span class='highlight'>sailed</span> to America in 1498. — This is Simple Past because:",
+    opts: ["The time is unspecified", "The exact year (1498) makes it a completed action at a definite time", "It describes a habit", "It is an ongoing action"],
+    ans: 1,
+    exp: "<strong>Simple Past</strong> is required when a specific time is given ('in 1498'). This is a completed historical action at a known, definite point in time. Present Perfect cannot be used with specific past time expressions."
+  },
+  {
+    cat: "Tenses",
+    q: "What is the correct structure for <strong>Present Continuous</strong> tense?",
+    opts: ["Do/does + V1", "Is/am/are + V-ing", "Has/have + V3", "Was/were + V3"],
+    ans: 1,
+    exp: "<strong>Present Continuous</strong> = is/am/are + V-ing. E.g., 'She is doing this work.' Used for actions happening at the moment of speaking or for future arranged plans."
+  },
+  {
+    cat: "Tenses",
+    q: "'She <span class='highlight'>has studied</span> Japanese, Russian, and English.' — The Present Perfect here emphasizes:",
+    opts: ["When exactly she studied", "Where she studied", "The result/experience — that she has this knowledge", "That she is currently studying"],
     ans: 2,
-    exp: "<strong>Has</strong> is used with he/she/it in Present Perfect. 'Have' is used with I/you/we/they. Structure: has/have + V3 (past participle). E.g., 'She has done this work.'"
+    exp: "When <strong>time is not important or unknown</strong>, Present Perfect focuses on the <em>result or experience</em>. We care that she has this ability, not when she acquired it. The same applies to: 'He has read War and Peace.'"
   },
   {
     cat: "Tenses",
-    q: "'What <span class='highlight'>did</span> you do at school today?' — Why is Simple Past used instead of Present Perfect?",
-    opts: ["Because the action is in the future", "Because the school day is considered finished — it refers to a completed period", "Because 'today' always requires Simple Past", "Because the action is habitual"],
+    q: "Which sentence is grammatically correct?",
+    opts: ["I have seen him yesterday.", "I saw him yesterday.", "I have saw him yesterday.", "I had saw him yesterday."],
     ans: 1,
-    exp: "Simple Past is used here because the <strong>school day is treated as a completed/finished period</strong>. If asking about results of an ongoing period, Present Perfect would be used: 'What have you done today?'"
+    exp: "<strong>'Yesterday'</strong> is a specific, completed time reference, so <strong>Simple Past</strong> is required: 'I saw him yesterday.' Present Perfect ('have seen') cannot be used with definite past time expressions like yesterday, last week, in 2010."
   },
   {
     cat: "Tenses",
-    q: "Select the correct <strong>Present Indefinite</strong> sentence:",
-    opts: ["She is cycling every day.", "She has cycled every day.", "She cycles every day.", "She was cycling every day."],
-    ans: 2,
-    exp: "<strong>Present Indefinite</strong> (Simple Present) = subject + V1 (+ s/es for he/she/it). It expresses habitual actions. 'Every day' is a classic signal word for this tense."
-  },
-  {
-    cat: "Tenses",
-    q: "I <span class='highlight'>have worked</span> hard this week. (The week is not over.) — What type of Present Perfect use is this?",
-    opts: ["Action completed in very recent past", "An action during an unfinished period", "A repeated action with no time specified", "Action with result more important than time"],
-    ans: 1,
-    exp: "Present Perfect is used for an <strong>action during a period that has not yet finished</strong>. 'This week' is still ongoing, so we use Present Perfect. If the week were over, Simple Past would be used."
-  },
-  {
-    cat: "Tenses",
-    q: "'He <span class='highlight'>was very tired</span> because he <span class='highlight'>hadn't slept</span> well.' — Identify the tenses used.",
-    opts: ["Past Continuous + Past Perfect", "Simple Past + Past Perfect", "Past Perfect + Simple Past", "Simple Past + Simple Past"],
-    ans: 1,
-    exp: "'Was tired' = <strong>Simple Past</strong> (the more recent event). 'Hadn't slept' = <strong>Past Perfect</strong> (the earlier event causing tiredness). Past Perfect shows which event occurred first."
-  },
-  {
-    cat: "Tenses",
-    q: "Which tense structure is: <strong>had + been + V-ing</strong>?",
-    opts: ["Past Perfect", "Past Continuous", "Past Perfect Continuous", "Present Perfect Continuous"],
-    ans: 2,
-    exp: "<strong>Past Perfect Continuous</strong> = had + been + V-ing. E.g., 'She had been doing this work for two hours.' It emphasizes the duration of an action before another past event."
-  },
-  {
-    cat: "Tenses",
-    q: "Helen, you've been cycling for three hours. — What tense is 'you've been cycling'?",
-    opts: ["Present Perfect", "Present Continuous", "Present Perfect Continuous", "Past Perfect Continuous"],
-    ans: 2,
-    exp: "<strong>Present Perfect Continuous</strong> = have/has + been + V-ing. It shows an action that <em>started in the past and continues into the present</em>, with emphasis on duration. Signal: 'for three hours'."
-  },
-  {
-    cat: "Tenses",
-    q: "I <span class='highlight'>cycle</span> almost every day. — This responds to a question about how often. What tense is it?",
-    opts: ["Present Continuous", "Present Perfect", "Past Indefinite", "Present Indefinite"],
-    ans: 3,
-    exp: "<strong>Present Indefinite</strong> is used for <em>general statements and actions that take place regularly</em>. 'Almost every day' confirms the habitual nature. Compare: 'I am cycling' = happening right now."
-  },
-  {
-    cat: "Tenses",
-    q: "She <span class='highlight'>will have done</span> this work by tomorrow. — What tense is this?",
-    opts: ["Future Continuous", "Future Perfect", "Future Perfect Continuous", "Present Perfect"],
-    ans: 1,
-    exp: "<strong>Future Perfect</strong> = will have + V3. It describes an action that will be completed before a specific point in the future. Signal phrase: 'by tomorrow'."
+    q: "He <span class='highlight'>has been reading</span> since morning. — What does 'since' signal in this tense?",
+    opts: ["Duration with a specific start point", "A repeated action", "A definite past time", "A future arrangement"],
+    ans: 0,
+    exp: "'<strong>Since</strong>' marks the <em>starting point</em> of an action that continues to the present. Used with Present Perfect and Present Perfect Continuous. Compare: '<strong>for</strong>' + duration (for two hours); '<strong>since</strong>' + start point (since morning)."
   },
 
-  // CLAUSES & SENTENCE TYPES (Q15–24)
+  // CLAUSES & SENTENCE TYPES (Q14–23)
   {
     cat: "Clauses",
-    q: "'Please send your documents <span class='highlight'>if you can</span>.' — What type of clause is highlighted?",
-    opts: ["Main Clause", "Coordinate Clause", "Subordinate Clause", "Relative Clause"],
-    ans: 2,
-    exp: "<strong>Subordinate (Dependent) Clause</strong>: introduced by the subordinating conjunction 'if'. It cannot stand alone and depends on the main clause ('Please send your documents') for meaning."
-  },
-  {
-    cat: "Clauses",
-    q: "How many clauses are in: 'They were busy so they did not come.'?",
-    opts: ["One", "Two", "Three", "Four"],
+    q: "How many clauses does this sentence have: 'The moon was bright.'?",
+    opts: ["Zero", "One", "Two", "Three"],
     ans: 1,
-    exp: "<strong>Two clauses</strong>: (1) 'They were busy' and (2) 'they did not come'. They are joined by 'so' (a coordinating conjunction), making this a <em>compound sentence</em> with two coordinate clauses."
+    exp: "<strong>One clause</strong> — this is a simple sentence with a single subject ('the moon') and verb ('was'). A simple sentence contains exactly one independent clause and no dependent clauses."
   },
   {
     cat: "Clauses",
-    q: "A subordinating conjunction:",
-    opts: ["Joins two independent clauses of equal rank", "Links a dependent clause to an independent clause", "Replaces a noun in a sentence", "Modifies an adjective"],
-    ans: 1,
-    exp: "A <strong>subordinating conjunction</strong> (e.g., when, if, because, although, whenever, since) links a <em>dependent clause to an independent clause</em>, showing the relationship between them."
-  },
-  {
-    cat: "Clauses",
-    q: "Which of these is a <strong>compound sentence</strong>?",
-    opts: ["When I arrived, the party had already started.", "She studied hard because she wanted to pass.", "I tried hard but I did not succeed.", "Whenever it rains, I stay indoors."],
-    ans: 2,
-    exp: "'I tried hard <strong>but</strong> I did not succeed.' — Two independent clauses joined by the coordinating conjunction 'but'. A compound sentence has no dependent clauses. The other options are complex sentences."
-  },
-  {
-    cat: "Clauses",
-    q: "Which of these is a <strong>complex sentence</strong>?",
-    opts: ["The moon was bright and we could see our way.", "He tried hard but failed.", "She doesn't decide which train to take.", "When Ali got home, he ate dinner."],
+    q: "Identify the sentence type: 'She studied hard because she wanted to pass, and she succeeded.'",
+    opts: ["Simple sentence", "Compound sentence", "Complex sentence", "Compound-Complex sentence"],
     ans: 3,
-    exp: "'When Ali got home, he ate dinner.' = <strong>Complex Sentence</strong>. 'When Ali got home' is a subordinate clause; 'he ate dinner' is the main clause. Complex = 1 independent + at least 1 dependent clause."
+    exp: "<strong>Compound-Complex</strong>: contains at least two independent clauses ('She studied hard' + 'she succeeded') AND at least one dependent clause ('because she wanted to pass'). It combines features of both compound and complex sentences."
   },
   {
     cat: "Clauses",
-    q: "'She doesn't decide <span class='highlight'>which</span> train to take.' — 'which' here functions as a:",
-    opts: ["Relative Pronoun", "Coordinating Conjunction", "Relative Adjective", "Subordinating Conjunction"],
+    q: "In '<span class='highlight'>Can you tell me what languages he speaks</span>?' — the highlighted part contains what type of clause?",
+    opts: ["Coordinate Clause", "Main Clause only", "A subordinate clause introduced by the relative adjective 'what'", "A compound clause"],
     ans: 2,
-    exp: "<strong>Relative Adjective</strong>: 'which' modifies the noun 'train' and introduces the clause. Relative adjectives (what, which, whatever, whichever) differ from relative pronouns because they modify nouns rather than replace them."
+    exp: "'<strong>what languages he speaks</strong>' is a <strong>subordinate clause</strong> introduced by the relative adjective 'what'. 'What' modifies 'languages' (noun) and introduces the embedded clause inside the main question."
   },
   {
     cat: "Clauses",
-    q: "An independent clause is one that:",
-    opts: ["Cannot stand alone as a sentence", "Begins with a subordinating conjunction", "Can stand alone as a complete sentence", "Always contains a modal verb"],
+    q: "Which of the following is NOT a subordinating conjunction?",
+    opts: ["Although", "Whenever", "But", "Because"],
     ans: 2,
-    exp: "An <strong>independent (main/principal) clause</strong> expresses a complete thought and <em>can stand alone as a sentence</em>. E.g., 'he ate dinner' is a complete sentence. Dependent clauses cannot stand alone."
+    exp: "'<strong>But</strong>' is a <em>coordinating conjunction</em> (part of FANBOYS), not a subordinating one. Coordinating conjunctions join independent clauses of equal rank. Subordinating conjunctions (although, whenever, because, if, when) introduce dependent clauses."
   },
   {
     cat: "Clauses",
-    q: "Identify the main clause in: '<span class='highlight'>Whenever I play a video game</span>, it reminds me of my childhood.'",
-    opts: ["Whenever I play a video game", "it reminds me of my childhood", "Whenever I play", "a video game, it reminds me"],
+    q: "'<span class='highlight'>They rested</span> when evening came.' — Which part is the main clause?",
+    opts: ["when evening came", "They rested", "evening came", "when evening"],
     ans: 1,
-    exp: "<strong>'It reminds me of my childhood'</strong> is the main (independent) clause — it can stand alone. 'Whenever I play a video game' is the subordinate clause introduced by 'whenever'."
+    exp: "<strong>'They rested'</strong> is the main (independent) clause — it expresses a complete thought and can stand alone as a sentence. 'When evening came' is the subordinate clause (introduced by 'when') — it cannot stand alone."
   },
   {
     cat: "Clauses",
-    q: "FANBOYS stands for the coordinating conjunctions: For, And, Nor, But, Or, Yet, ___.",
-    opts: ["Sometimes", "Since", "So", "Still"],
+    q: "A <strong>simple sentence</strong> contains:",
+    opts: ["One independent clause and one dependent clause", "Two independent clauses", "Only one independent clause with no dependent clauses", "At least three clauses"],
     ans: 2,
-    exp: "FANBOYS = <strong>For, And, Nor, But, Or, Yet, So</strong>. These are the seven coordinating conjunctions used to join independent clauses in compound sentences. E.g., 'They were busy <em>so</em> they did not come.'"
+    exp: "A <strong>simple sentence</strong> has exactly <em>one independent clause</em> and no dependent clauses. E.g., 'The moon was bright.' It may have modifiers and phrases, but only one subject-verb core."
   },
   {
     cat: "Clauses",
-    q: "'I shall encourage you, <span class='highlight'>whichever career</span> you choose.' — 'whichever' is a relative adjective because it:",
-    opts: ["Replaces the noun 'career'", "Modifies the noun 'career' and introduces a clause", "Acts as the main verb", "Joins two independent clauses"],
+    q: "What makes 'when evening came' a subordinate clause?",
+    opts: ["It has no verb", "It is introduced by 'when' and cannot stand alone as a complete sentence", "It has two subjects", "It contains a modal verb"],
     ans: 1,
-    exp: "<strong>Relative adjectives</strong> both <em>modify a noun</em> ('career') AND <em>introduce a relative clause</em>. 'Whichever' tells us which career — it describes/modifies the noun rather than replacing it."
+    exp: "A subordinate clause has a subject and verb but is introduced by a <strong>subordinating conjunction</strong> ('when') and <em>cannot stand alone</em>. 'When evening came' — can you say this as a complete sentence? No. That is what makes it dependent."
+  },
+  {
+    cat: "Clauses",
+    q: "'Whatever decision you take, I can support you.' — This is an example of a:",
+    opts: ["Compound sentence", "Simple sentence", "Complex sentence", "Coordinate clause"],
+    ans: 2,
+    exp: "<strong>Complex sentence</strong>: 'Whatever decision you take' is a subordinate clause (dependent); 'I can support you' is the main clause (independent). The relative adjective 'whatever' introduces the dependent clause."
+  },
+  {
+    cat: "Clauses",
+    q: "Coordinate clauses are joined by coordinating conjunctions. Which set below are ALL coordinating conjunctions?",
+    opts: ["When, if, because, although", "And, but, so, or", "Since, until, unless, while", "Who, which, that, where"],
+    ans: 1,
+    exp: "<strong>And, but, so, or</strong> are all coordinating conjunctions (FANBOYS: For, And, Nor, But, Or, Yet, So). They join clauses of equal grammatical rank. The other options are subordinating conjunctions or relative pronouns."
+  },
+  {
+    cat: "Clauses",
+    q: "Which sentence contains a <strong>relative adjective</strong>?",
+    opts: ["He came when I called.", "She doesn't know which road to take.", "They left because it was late.", "I stayed although it was cold."],
+    ans: 1,
+    exp: "'<strong>which road</strong>' — 'which' is a <strong>relative adjective</strong> modifying the noun 'road'. Compare: 'Which did she take?' (relative pronoun — replaces noun) vs 'which road' (relative adjective — modifies noun)."
+  },
+  {
+    cat: "Clauses",
+    q: "How many independent clauses does a compound sentence have?",
+    opts: ["Zero", "Exactly one", "Two or more", "It depends on the subordinating conjunction"],
+    ans: 2,
+    exp: "A <strong>compound sentence</strong> has <em>two or more independent clauses</em> joined by coordinating conjunctions or a semicolon. Crucially, it contains <em>no dependent clauses</em> — that would make it complex or compound-complex."
   },
 
-  // TYPES OF VERBS (Q25–33)
+  // TYPES OF VERBS (Q24–33)
   {
     cat: "Types of Verbs",
-    q: "'Toby <span class='highlight'>buys groceries</span>.' — 'buys' is transitive because:",
-    opts: ["It describes a state of being", "It takes a direct object ('groceries')", "It connects the subject to an adjective", "It is formed with an auxiliary verb"],
+    q: "'Alicia <span class='highlight'>has not spoken</span> to me for a week.' — 'has' is functioning as:",
+    opts: ["A linking verb", "A stative verb", "An auxiliary (helping) verb", "A modal verb"],
+    ans: 2,
+    exp: "<strong>Auxiliary verb</strong>: 'has' helps form the Present Perfect tense and the negative construction. Auxiliary verbs (be, do, have) are always conjugated and work with a main verb to express tense, mood, or voice."
+  },
+  {
+    cat: "Types of Verbs",
+    q: "Which sentence contains a <strong>linking verb</strong>?",
+    opts: ["She runs every morning.", "He seems very tired today.", "They built a new house.", "I moved out last month."],
     ans: 1,
-    exp: "<strong>Transitive verbs</strong> require a <em>direct object</em> to complete their meaning. Here, 'groceries' answers the question 'buys WHAT?' Without the object, 'Toby buys' feels incomplete."
+    exp: "'<strong>Seems</strong>' is a linking verb — it connects the subject ('he') to the subject complement ('very tired'). Common linking verbs: be, seem, become, feel, appear, look, smell, taste, sound."
   },
   {
     cat: "Types of Verbs",
-    q: "Which sentence contains an <strong>intransitive verb</strong>?",
-    opts: ["She reads a book.", "He kicked the ball.", "The baby slept soundly.", "Maria wrote a letter."],
-    ans: 2,
-    exp: "'Slept' is <strong>intransitive</strong> — it has no direct object. 'Soundly' is an adverb, not an object. The other options all have direct objects (book, ball, letter), making their verbs transitive."
-  },
-  {
-    cat: "Types of Verbs",
-    q: "'Fionn <span class='highlight'>is</span> proud.' vs 'Sofie <span class='highlight'>feels</span> the pillow.' — In the second sentence, 'feels' is:",
-    opts: ["A linking verb", "A stative verb", "An action (dynamic) verb", "A modal verb"],
-    ans: 2,
-    exp: "In 'Sofie feels the pillow', 'feels' is an <strong>action (dynamic) verb</strong> — she is physically touching it. In 'The pillow feels soft', 'feels' is a linking verb. Most linking verbs can also be used as action verbs."
-  },
-  {
-    cat: "Types of Verbs",
-    q: "Which of these is a <strong>stative verb</strong>?",
-    opts: ["Run", "Write", "Belong", "Jump"],
-    ans: 2,
-    exp: "<strong>'Belong'</strong> is a stative verb — it describes a state/relationship, not an action. You cannot say 'He is belonging to the club.' Other stative verbs: know, believe, seem, love, hear, contain."
-  },
-  {
-    cat: "Types of Verbs",
-    q: "'The door <span class='highlight'>was locked</span>.' — 'was' functions here as:",
-    opts: ["A linking verb", "A modal verb", "An auxiliary verb forming the passive voice", "A dynamic verb"],
-    ans: 2,
-    exp: "<strong>Auxiliary verb</strong>: 'was' helps form the <em>passive voice</em> (past simple passive = was/were + V3). 'Was locked' describes the state of the door. The agent (who locked it) is not mentioned."
-  },
-  {
-    cat: "Types of Verbs",
-    q: "'I can read Arabic and Hebrew.' — 'can' expresses:",
-    opts: ["Obligation", "Ability", "Permission only", "Future plan"],
+    q: "Why can't we say '<span class='highlight'>X She is knowing the answer</span>'?",
+    opts: ["'Know' is a transitive verb", "'Know' is a stative verb — stative verbs cannot be used in continuous tenses", "'Know' is an irregular verb", "'Know' is a modal verb"],
     ans: 1,
-    exp: "<strong>Modal verb 'can'</strong> expresses <em>ability</em> here. Modal verbs also express permission (can I?), possibility (it can happen), necessity (must), and obligation (should). Modal verbs never change form."
+    exp: "<strong>Stative verbs</strong> describe mental states, emotions, or perceptions and <em>cannot be used in progressive tenses</em>. 'Know' describes a mental state. Correct form: 'She knows the answer.' Other examples: believe, love, hate, seem, belong."
   },
   {
     cat: "Types of Verbs",
-    q: "The verb 'kick off' meaning 'to begin' is an example of a:",
-    opts: ["Stative Verb", "Linking Verb", "Phrasal Verb", "Irregular Verb"],
+    q: "'Talia <span class='highlight'>ought to</span> perform at the talent show.' — 'ought to' is a:",
+    opts: ["Phrasal verb", "Dynamic verb", "Modal verb", "Linking verb"],
     ans: 2,
-    exp: "<strong>Phrasal Verb</strong>: verb + adverb/preposition creating a new meaning independent of the original words. 'Kick' + 'off' = 'begin'. Other examples: give up (quit), look up (search), break down (stop working)."
+    exp: "<strong>Modal verb</strong>: 'ought to' expresses obligation or recommendation. It functions like other modals (should, must) but always takes 'to'. Modal verbs do not change form based on subject. Other modals: can, could, may, might, will, would."
   },
   {
     cat: "Types of Verbs",
-    q: "Melissa <span class='highlight'>has swum</span> every Saturday for three years. — 'swum' is the past participle of an:",
-    opts: ["Regular verb", "Auxiliary verb", "Irregular verb", "Modal verb"],
+    q: "Which of these is a <strong>phrasal verb</strong>?",
+    opts: ["Run", "Is running", "Give up", "Has run"],
     ans: 2,
-    exp: "<strong>Irregular verb</strong>: swim → swam (simple past) → swum (past participle). It does not follow the regular '-ed' rule. Other irregular examples: go/went/gone, write/wrote/written, eat/ate/eaten."
+    exp: "<strong>'Give up'</strong> = phrasal verb (verb + preposition/adverb) meaning 'to quit or stop'. The combined meaning is independent of the original words. Other examples: break down, look up, turn off, come across, move out."
   },
   {
     cat: "Types of Verbs",
-    q: "Claude <span class='highlight'>had finished</span> his dinner when James called. — 'finished' here is the past participle of a:",
-    opts: ["Irregular verb", "Modal verb", "Stative verb", "Regular verb"],
-    ans: 3,
-    exp: "<strong>Regular verb</strong>: 'finish' forms its past and past participle by adding '-ed' → 'finished'. Regular verbs follow standard conjugation rules. Most English verbs are regular."
+    q: "'Did you <span class='highlight'>enjoy</span> the meal?' — 'did' here is:",
+    opts: ["A modal verb", "A main verb", "An auxiliary verb used to form a question", "A linking verb"],
+    ans: 2,
+    exp: "<strong>Auxiliary 'do/did'</strong> is used to form questions and negatives in Simple Past and Simple Present. 'Did' is the past form. The main verb ('enjoy') remains in its base form (V1) after the auxiliary."
+  },
+  {
+    cat: "Types of Verbs",
+    q: "Which sentence contains a <strong>dynamic (action) verb</strong> used in continuous form correctly?",
+    opts: ["She is believing in herself.", "He is knowing the truth.", "They are building a new school.", "I am belonging to the club."],
+    ans: 2,
+    exp: "'<strong>Building</strong>' is a <strong>dynamic (action) verb</strong> — it describes a specific, ongoing physical activity and can correctly be used in the continuous tense. Believe, know, and belong are stative verbs and cannot take the continuous form."
+  },
+  {
+    cat: "Types of Verbs",
+    q: "Tina <span class='highlight'>will have finished</span> her course by the end of next month. — 'finished' here is the past participle of a:",
+    opts: ["Modal verb", "Irregular verb", "Regular verb", "Stative verb"],
+    ans: 2,
+    exp: "<strong>Regular verb</strong>: 'finish → finished → finished'. Regular verbs form both simple past and past participle by adding '-ed'. This sentence uses Future Perfect tense (will have + V3)."
+  },
+  {
+    cat: "Types of Verbs",
+    q: "Which of these pairs shows a verb being used first as a <strong>linking verb</strong>, then as an <strong>action verb</strong>?",
+    opts: ["'She runs' / 'She ran'", "'The soup smells good' / 'She smells the soup'", "'He has gone' / 'He goes'", "'I believe' / 'I am believing'"],
+    ans: 1,
+    exp: "'<strong>The soup smells good</strong>' — 'smells' is a <strong>linking verb</strong> (connects subject to complement 'good'). '<strong>She smells the soup</strong>' — 'smells' is an <strong>action verb</strong> (she is actively sniffing it). Most linking verbs can double as action verbs."
+  },
+  {
+    cat: "Types of Verbs",
+    q: "'I <span class='highlight'>had swum</span> almost a mile when the island came into view.' — 'swum' is:",
+    opts: ["Simple past of 'swim'", "Past participle of the irregular verb 'swim'", "Present participle of 'swim'", "Past participle of a regular verb"],
+    ans: 1,
+    exp: "'<strong>Swum</strong>' is the <strong>past participle</strong> of the <strong>irregular verb</strong> 'swim'. Conjugation: swim (base) → swam (simple past) → swum (past participle). Used here in Past Perfect: had + swum."
   },
 
-  // PARTS OF SPEECH / NOUNS / ADJECTIVES (Q34–37)
+  // PARTS OF SPEECH / NOUNS & ADJECTIVES (Q34–37)
   {
     cat: "Parts of Speech",
-    q: "In Passive Voice, which structure is used?",
-    opts: ["SVO (Subject-Verb-Object)", "VSO (Verb-Subject-Object)", "OVS (Object-Verb-Subject)", "SOV (Subject-Object-Verb)"],
-    ans: 2,
-    exp: "<strong>Passive Voice</strong> uses <strong>OVS</strong> structure. The object of an active sentence becomes the subject. E.g., Active: 'She does this work.' (SVO) → Passive: 'This work is done by her.' (OVS)"
-  },
-  {
-    cat: "Parts of Speech",
-    q: "'Amy <span class='highlight'>kicks</span> the ball.' — 'kicks' is classified as a dynamic verb because:",
-    opts: ["It describes a permanent state", "It expresses a specific, temporary physical action", "It connects the subject to a complement", "It is formed with an auxiliary"],
+    q: "A verb is defined as:",
+    opts: ["A word that describes a noun", "A word that describes what the subject is doing — indicating actions, occurrences, or states of being", "A word that joins clauses", "A word that replaces a noun"],
     ans: 1,
-    exp: "<strong>Dynamic (Action) Verbs</strong> describe specific, temporary actions or events. 'Kick' is a clear physical action. Unlike stative verbs, dynamic verbs CAN be used in continuous tenses: 'Amy is kicking the ball.'"
+    exp: "A <strong>verb</strong> describes what the subject <em>does, experiences, or is</em>. Verbs indicate physical actions (run, kick), mental actions (think, believe), occurrences (happen, become), and states of being (is, seem, belong)."
   },
   {
     cat: "Parts of Speech",
-    q: "In 'He did not say <span class='highlight'>what help</span> he wanted.' — 'what' is a relative adjective because:",
-    opts: ["It replaces 'he' in the sentence", "It modifies the noun 'help' and introduces a clause", "It joins two main clauses", "It is a question word only"],
+    q: "In 'She is <span class='highlight'>proud</span>', 'proud' is an adjective functioning as a:",
+    opts: ["Attributive adjective (before a noun)", "Subject complement (after a linking verb)", "Adverb modifying a verb", "Object complement"],
     ans: 1,
-    exp: "<strong>Relative Adjective 'what'</strong>: it modifies 'help' (describing which help) AND introduces the relative clause 'what help he wanted'. Compare: 'What did he want?' (question pronoun) vs 'what help he wanted' (relative adjective)."
+    exp: "'Proud' here is a <strong>subject complement (predicative adjective)</strong> — it follows the linking verb 'is' and describes the subject 'she'. Contrast with attributive use: 'She is a <em>proud</em> person' (adjective before noun)."
   },
   {
     cat: "Parts of Speech",
-    q: "Which of these sentences uses <strong>Active Voice</strong>?",
-    opts: ["The letter was written by her.", "The cake was eaten by the children.", "The dog chased the cat.", "The window was broken."],
+    q: "How many tenses exist in English <strong>Active Voice</strong> according to your course material?",
+    opts: ["8", "10", "12", "16"],
     ans: 2,
-    exp: "<strong>Active Voice</strong> (SVO): 'The dog (S) chased (V) the cat (O).' The subject performs the action. Passive voice sentences have the action performed upon the subject: 'The cat was chased by the dog.'"
+    exp: "According to the course material, English Active Voice has <strong>12 tenses</strong>: 4 present (Indefinite, Continuous, Perfect, Perfect Continuous), 4 past, and 4 future. Passive Voice has only 8 tenses."
+  },
+  {
+    cat: "Parts of Speech",
+    q: "Which word in this sentence is functioning as a <strong>relative adjective</strong>: 'I shall encourage you, whichever career you choose.'?",
+    opts: ["I", "shall", "whichever", "choose"],
+    ans: 2,
+    exp: "<strong>'Whichever'</strong> is the relative adjective — it modifies the noun 'career' (whichever career) and simultaneously introduces the subordinate clause 'whichever career you choose'. Relative adjectives: what, which, whatever, whichever."
   },
 
   // VOCABULARY (Q38–40)
   {
     cat: "Vocabulary",
-    q: "Which sentence uses <strong>'frigid'</strong> correctly?",
-    opts: ["The frigid sunshine warmed everyone.", "The frigid temperature made the lake freeze overnight.", "She gave a frigid performance full of energy.", "He made a frigid decision very quickly."],
+    q: "Which sentence uses <strong>'shriek'</strong> correctly?",
+    opts: ["She shrieked calmly at the good news.", "He shrieked with laughter when he heard the joke.", "The shriek was very silent.", "She shrieked the book onto the shelf."],
     ans: 1,
-    exp: "<strong>Frigid</strong>: extremely cold; intensely cold in temperature. It can also describe an unfriendly, cold manner. E.g., 'frigid Arctic winds' / 'a frigid reception'. Synonym: freezing, icy."
+    exp: "<strong>Shriek</strong> (verb/noun): to make a loud, high-pitched cry or sound, usually from shock, fear, or excitement. E.g., 'She shrieked in terror.' / 'We heard a shriek from the next room.' Synonym: scream, screech."
   },
   {
     cat: "Vocabulary",
-    q: "Choose the correct usage of <strong>'recline'</strong>:",
-    opts: ["She reclined the book on the shelf.", "He reclined comfortably in his chair after dinner.", "They reclined the meeting for tomorrow.", "The teacher reclined the students carefully."],
+    q: "'He <span class='highlight'>tempted</span> her with the offer of a promotion.' — What does 'tempt' mean?",
+    opts: ["To threaten someone forcefully", "To entice or attract someone toward something, often something they should resist", "To punish someone for a mistake", "To ignore someone deliberately"],
     ans: 1,
-    exp: "<strong>Recline</strong> (verb): to lean or lie back in a relaxed position. E.g., 'She reclined on the sofa.' / 'The seat reclines fully.' It refers to the body or something adjustable leaning backward."
+    exp: "<strong>Tempt</strong> (verb): to entice or attract someone toward doing something, often something they find hard to resist. E.g., 'Don't tempt me with chocolate.' / 'He was tempted to quit.' Noun form: temptation."
   },
   {
     cat: "Vocabulary",
-    q: "'She used great <span class='highlight'>tact</span> when delivering the bad news.' — What does 'tact' mean?",
-    opts: ["Loudness and force", "Skill in dealing with sensitive situations without causing offense", "A type of written agreement", "Physical strength"],
+    q: "Which sentence uses <strong>'inhabit'</strong> correctly?",
+    opts: ["She inhabited the book in one evening.", "Many rare species inhabit the rainforest.", "He inhabited his homework quickly.", "They inhabited a loud argument."],
     ans: 1,
-    exp: "<strong>Tact</strong> (noun): the ability to deal with difficult or delicate situations sensitively and without offending people. Adjective form: <em>tactful</em>. E.g., 'She handled the criticism with tact and grace.'"
+    exp: "<strong>Inhabit</strong> (verb): to live in or occupy a place as a resident or habitat. Used for both people and animals. E.g., 'Thousands of species inhabit the ocean.' / 'The island is inhabited by a small community.' Synonym: occupy, dwell in."
   }
 ];
 let currentQ = 0;
