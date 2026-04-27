@@ -1,940 +1,979 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>English Midterm Quiz</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0d0f14;
-    --card: #14181f;
-    --border: #1e2530;
-    --accent: #f0c040;
-    --accent2: #4fc3f7;
-    --text: #e8eaf0;
-    --muted: #7a8390;
-    --correct: #4caf82;
-    --wrong: #e05c6e;
-    --correct-bg: #0d2e1f;
-    --wrong-bg: #2e0d16;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Midterm Quiz</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --card: #14181f;
+      --border: #1e2530;
+      --accent: #f0c040;
+      --accent2: #4fc3f7;
+      --text: #e8eaf0;
+      --muted: #7a8390;
+      --correct: #4caf82;
+      --wrong: #e05c6e;
+      --correct-bg: #0d2e1f;
+      --wrong-bg: #2e0d16;
+    }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-    padding: 0;
-  }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      padding: 0;
+    }
 
-  /* START SCREEN */
-  #start-screen {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
-    background: radial-gradient(ellipse at 60% 30%, #1a2235 0%, #0d0f14 70%);
-    text-align: center;
-  }
+    /* START SCREEN */
+    #start-screen {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background: radial-gradient(ellipse at 60% 30%, #1a2235 0%, #0d0f14 70%);
+      text-align: center;
+    }
 
-  .logo-badge {
-    background: var(--accent);
-    color: #000;
-    font-family: 'Playfair Display', serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 6px 18px;
-    border-radius: 2px;
-    margin-bottom: 28px;
-  }
+    .logo-badge {
+      background: var(--accent);
+      color: #000;
+      font-family: 'Playfair Display', serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 2px;
+      margin-bottom: 28px;
+    }
 
-  #start-screen h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 6vw, 4rem);
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 16px;
-    color: #fff;
-  }
+    #start-screen h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: #fff;
+    }
 
-  #start-screen h1 span { color: var(--accent); }
+    #start-screen h1 span {
+      color: var(--accent);
+    }
 
-  #start-screen p {
-    color: var(--muted);
-    font-size: 1.05rem;
-    max-width: 480px;
-    line-height: 1.7;
-    margin-bottom: 40px;
-  }
+    #start-screen p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
 
-  .topic-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    max-width: 540px;
-    margin-bottom: 44px;
-  }
+    .topic-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      max-width: 540px;
+      margin-bottom: 44px;
+    }
 
-  .topic-pill {
-    background: #1a2235;
-    border: 1px solid var(--border);
-    color: var(--accent2);
-    font-size: 0.78rem;
-    font-weight: 500;
-    padding: 6px 14px;
-    border-radius: 100px;
-    letter-spacing: 0.5px;
-  }
+    .topic-pill {
+      background: #1a2235;
+      border: 1px solid var(--border);
+      color: var(--accent2);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 100px;
+      letter-spacing: 0.5px;
+    }
 
-  .start-btn {
-    background: var(--accent);
-    color: #000;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    padding: 16px 48px;
-    border-radius: 4px;
-    cursor: pointer;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 0.15s, box-shadow 0.15s;
-    box-shadow: 0 0 0 0 rgba(240,192,64,0.4);
-  }
+    .start-btn {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 16px 48px;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 0 0 0 rgba(240, 192, 64, 0.4);
+    }
 
-  .start-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(240,192,64,0.25);
-  }
+    .start-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(240, 192, 64, 0.25);
+    }
 
-  /* QUIZ SCREEN */
-  #quiz-screen { display: none; min-height: 100vh; }
+    /* QUIZ SCREEN */
+    #quiz-screen {
+      display: none;
+      min-height: 100vh;
+    }
 
-  .quiz-header {
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
+    .quiz-header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-  .quiz-brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    color: var(--accent);
-    font-weight: 700;
-  }
+    .quiz-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
 
-  .progress-wrap {
-    flex: 1;
-    margin: 0 32px;
-  }
+    .progress-wrap {
+      flex: 1;
+      margin: 0 32px;
+    }
 
-  .progress-bar-bg {
-    background: var(--border);
-    border-radius: 100px;
-    height: 6px;
-    overflow: hidden;
-  }
+    .progress-bar-bg {
+      background: var(--border);
+      border-radius: 100px;
+      height: 6px;
+      overflow: hidden;
+    }
 
-  .progress-bar-fill {
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    height: 100%;
-    border-radius: 100px;
-    transition: width 0.4s cubic-bezier(.4,0,.2,1);
-  }
+    .progress-bar-fill {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      height: 100%;
+      border-radius: 100px;
+      transition: width 0.4s cubic-bezier(.4, 0, .2, 1);
+    }
 
-  .progress-label {
-    font-size: 0.75rem;
-    color: var(--muted);
-    margin-top: 5px;
-    text-align: center;
-  }
+    .progress-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 5px;
+      text-align: center;
+    }
 
-  .score-display {
-    background: #1a2235;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 6px 16px;
-    font-size: 0.85rem;
-    color: var(--accent);
-    font-weight: 700;
-    white-space: nowrap;
-  }
+    .score-display {
+      background: #1a2235;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 700;
+      white-space: nowrap;
+    }
 
-  .quiz-body {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 48px 24px 80px;
-  }
+    .quiz-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
 
-  .q-category {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--accent2);
-    margin-bottom: 12px;
-  }
+    .q-category {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 12px;
+    }
 
-  .q-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    font-weight: 900;
-    color: var(--border);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
+    .q-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
 
-  .q-text {
-    font-size: 1.2rem;
-    line-height: 1.65;
-    color: #fff;
-    margin-bottom: 32px;
-    font-weight: 400;
-  }
+    .q-text {
+      font-size: 1.2rem;
+      line-height: 1.65;
+      color: #fff;
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
 
-  .q-text .highlight {
-    background: rgba(240,192,64,0.15);
-    border-bottom: 2px solid var(--accent);
-    padding: 1px 4px;
-    border-radius: 2px;
-    color: var(--accent);
-    font-weight: 500;
-  }
+    .q-text .highlight {
+      background: rgba(240, 192, 64, 0.15);
+      border-bottom: 2px solid var(--accent);
+      padding: 1px 4px;
+      border-radius: 2px;
+      color: var(--accent);
+      font-weight: 500;
+    }
 
-  .options-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
 
-  .option-btn {
-    background: var(--card);
-    border: 1.5px solid var(--border);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    padding: 16px 20px;
-    border-radius: 8px;
-    text-align: left;
-    cursor: pointer;
-    transition: border-color 0.18s, background 0.18s, transform 0.12s;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    line-height: 1.5;
-  }
+    .option-btn {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      padding: 16px 20px;
+      border-radius: 8px;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s, transform 0.12s;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      line-height: 1.5;
+    }
 
-  .option-btn:hover:not(:disabled) {
-    border-color: var(--accent2);
-    background: #1a2235;
-    transform: translateX(4px);
-  }
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--accent2);
+      background: #1a2235;
+      transform: translateX(4px);
+    }
 
-  .option-letter {
-    min-width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--border);
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    flex-shrink: 0;
-    transition: background 0.18s, color 0.18s;
-  }
+    .option-letter {
+      min-width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--border);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+      transition: background 0.18s, color 0.18s;
+    }
 
-  .option-btn.correct {
-    background: var(--correct-bg);
-    border-color: var(--correct);
-  }
+    .option-btn.correct {
+      background: var(--correct-bg);
+      border-color: var(--correct);
+    }
 
-  .option-btn.correct .option-letter {
-    background: var(--correct);
-    color: #fff;
-  }
+    .option-btn.correct .option-letter {
+      background: var(--correct);
+      color: #fff;
+    }
 
-  .option-btn.wrong {
-    background: var(--wrong-bg);
-    border-color: var(--wrong);
-  }
+    .option-btn.wrong {
+      background: var(--wrong-bg);
+      border-color: var(--wrong);
+    }
 
-  .option-btn.wrong .option-letter {
-    background: var(--wrong);
-    color: #fff;
-  }
+    .option-btn.wrong .option-letter {
+      background: var(--wrong);
+      color: #fff;
+    }
 
-  .option-btn:disabled { cursor: default; }
+    .option-btn:disabled {
+      cursor: default;
+    }
 
-  .explanation-box {
-    margin-top: 20px;
-    background: #111827;
-    border-left: 3px solid var(--accent);
-    padding: 16px 20px;
-    border-radius: 0 8px 8px 0;
-    font-size: 0.92rem;
-    line-height: 1.7;
-    color: #c8d0dc;
-    display: none;
-    animation: fadeIn 0.3s ease;
-  }
+    .explanation-box {
+      margin-top: 20px;
+      background: #111827;
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #c8d0dc;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
 
-  .explanation-box strong { color: var(--accent); }
+    .explanation-box strong {
+      color: var(--accent);
+    }
 
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
 
-  .next-btn {
-    margin-top: 24px;
-    background: transparent;
-    border: 1.5px solid var(--accent);
-    color: var(--accent);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 12px 32px;
-    border-radius: 4px;
-    cursor: pointer;
-    display: none;
-    transition: background 0.18s, color 0.18s;
-  }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
 
-  .next-btn:hover {
-    background: var(--accent);
-    color: #000;
-  }
+    .next-btn {
+      margin-top: 24px;
+      background: transparent;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 12px 32px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: none;
+      transition: background 0.18s, color 0.18s;
+    }
 
-  /* RESULTS SCREEN */
-  #results-screen {
-    display: none;
-    min-height: 100vh;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
-    background: radial-gradient(ellipse at 40% 60%, #1a2235 0%, #0d0f14 70%);
-  }
+    .next-btn:hover {
+      background: var(--accent);
+      color: #000;
+    }
 
-  .results-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 52px 48px;
-    max-width: 560px;
-    width: 100%;
-    text-align: center;
-  }
+    /* RESULTS SCREEN */
+    #results-screen {
+      display: none;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background: radial-gradient(ellipse at 40% 60%, #1a2235 0%, #0d0f14 70%);
+    }
 
-  .score-ring {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: conic-gradient(var(--accent) 0%, var(--border) 0%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 28px;
-    position: relative;
-  }
+    .results-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 52px 48px;
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+    }
 
-  .score-ring-inner {
-    width: 96px;
-    height: 96px;
-    background: var(--card);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+    .score-ring {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent) 0%, var(--border) 0%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      position: relative;
+    }
 
-  .score-pct {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: var(--accent);
-    line-height: 1;
-  }
+    .score-ring-inner {
+      width: 96px;
+      height: 96px;
+      background: var(--card);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
-  .score-pct-label {
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 1px;
-    margin-top: 2px;
-  }
+    .score-pct {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+    }
 
-  .results-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 900;
-    margin-bottom: 10px;
-  }
+    .score-pct-label {
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
 
-  .results-sub {
-    color: var(--muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 32px;
-  }
+    .results-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
 
-  .stats-row {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 36px;
-  }
+    .results-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
 
-  .stat-box {
-    flex: 1;
-    background: #1a2235;
-    border-radius: 8px;
-    padding: 16px;
-  }
+    .stats-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
 
-  .stat-val {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 900;
-  }
+    .stat-box {
+      flex: 1;
+      background: #1a2235;
+      border-radius: 8px;
+      padding: 16px;
+    }
 
-  .stat-val.green { color: var(--correct); }
-  .stat-val.red { color: var(--wrong); }
+    .stat-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+    }
 
-  .stat-label {
-    font-size: 0.75rem;
-    color: var(--muted);
-    margin-top: 4px;
-    letter-spacing: 0.5px;
-  }
+    .stat-val.green {
+      color: var(--correct);
+    }
 
-  .restart-btn {
-    background: var(--accent);
-    color: #000;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    padding: 14px 40px;
-    border-radius: 4px;
-    cursor: pointer;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
+    .stat-val.red {
+      color: var(--wrong);
+    }
 
-  .restart-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(240,192,64,0.25);
-  }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 4px;
+      letter-spacing: 0.5px;
+    }
 
-  @media (max-width: 600px) {
-    .quiz-header { padding: 12px 16px; }
-    .progress-wrap { margin: 0 12px; }
-    .quiz-body { padding: 32px 16px 60px; }
-    .q-number { font-size: 2rem; }
-    .q-text { font-size: 1.05rem; }
-    .results-card { padding: 36px 24px; }
-  }
-</style>
+    .restart-btn {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 14px 40px;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .restart-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(240, 192, 64, 0.25);
+    }
+
+    @media (max-width: 600px) {
+      .quiz-header {
+        padding: 12px 16px;
+      }
+
+      .progress-wrap {
+        margin: 0 12px;
+      }
+
+      .quiz-body {
+        padding: 32px 16px 60px;
+      }
+
+      .q-number {
+        font-size: 2rem;
+      }
+
+      .q-text {
+        font-size: 1.05rem;
+      }
+
+      .results-card {
+        padding: 36px 24px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- START -->
-<div id="start-screen">
-  <div class="logo-badge">Hamdard University · ENG-01</div>
-  <h1>English <span>Midterm</span><br>Quiz</h1>
-  <p>40 questions covering Tenses, Clauses, Types of Verbs, Parts of Speech, and Vocabulary. Select an answer to see the explanation instantly.</p>
-  <div class="topic-grid">
-    <span class="topic-pill">Tenses</span>
-    <span class="topic-pill">Parts of Speech</span>
-    <span class="topic-pill">Types of Verbs</span>
-    <span class="topic-pill">Clauses</span>
-    <span class="topic-pill">Sentence Types</span>
-    <span class="topic-pill">Vocabulary</span>
-    <span class="topic-pill">Present Tenses Usage</span>
-    <span class="topic-pill">Adjectives</span>
-  </div>
-  <button class="start-btn" onclick="startQuiz()">Start Quiz →</button>
-</div>
-
-<!-- QUIZ -->
-<div id="quiz-screen">
-  <div class="quiz-header">
-    <div class="quiz-brand">ENG-01 Quiz</div>
-    <div class="progress-wrap">
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
-      </div>
-      <div class="progress-label" id="progress-label">Question 1 of 40</div>
+  <!-- START -->
+  <div id="start-screen">
+    <div class="logo-badge">Iqra University · Math-01</div>
+    <h1>Math <span>Midterm</span><br>Quiz</h1>
+    <p>40 questions covering Limits Domain Range Continuity and
+      Derivatives. Select an answer to see the explanation instantly.</p>
+    <div class="topic-grid">
+      <span class="topic-pill">Limits</span>
+      <span class="topic-pill">Domain</span>
+      <span class="topic-pill">Range</span>
+      <span class="topic-pill">Continuity</span>
+      <span class="topic-pill">Derivatives</span>
     </div>
-    <div class="score-display" id="score-display">Score: 0</div>
+    <button class="start-btn" onclick="startQuiz()">Start Quiz →</button>
   </div>
-  <div class="quiz-body">
-    <div class="q-category" id="q-category"></div>
-    <div class="q-number" id="q-number"></div>
-    <div class="q-text" id="q-text"></div>
-    <div class="options-grid" id="options-grid"></div>
-    <div class="explanation-box" id="explanation-box"></div>
-    <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question →</button>
-  </div>
-</div>
 
-<!-- RESULTS -->
-<div id="results-screen">
-  <div class="results-card">
-    <div class="score-ring" id="score-ring">
-      <div class="score-ring-inner">
-        <div class="score-pct" id="score-pct">0%</div>
-        <div class="score-pct-label">SCORE</div>
+  <!-- QUIZ -->
+  <div id="quiz-screen">
+    <div class="quiz-header">
+      <div class="quiz-brand">Math-01 Quiz</div>
+      <div class="progress-wrap">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+        <div class="progress-label" id="progress-label">Question 1 of 40</div>
       </div>
+      <div class="score-display" id="score-display">Score: 0</div>
     </div>
-    <div class="results-title" id="results-title">Quiz Complete!</div>
-    <div class="results-sub" id="results-sub"></div>
-    <div class="stats-row">
-      <div class="stat-box">
-        <div class="stat-val green" id="correct-count">0</div>
-        <div class="stat-label">Correct</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val red" id="wrong-count">0</div>
-        <div class="stat-label">Wrong</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val" id="total-count" style="color:var(--accent2)">40</div>
-        <div class="stat-label">Total</div>
-      </div>
+    <div class="quiz-body">
+      <div class="q-category" id="q-category"></div>
+      <div class="q-number" id="q-number"></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="options-grid" id="options-grid"></div>
+      <div class="explanation-box" id="explanation-box"></div>
+      <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question →</button>
     </div>
-    <button class="restart-btn" onclick="restartQuiz()">Retake Quiz</button>
   </div>
-</div>
 
-<script>
-const questions = [
-  // TENSES (Q1–13)
-  {
-    cat: "Tenses",
-    q: "Which sentence is in the <strong>Future Indefinite</strong> tense?",
-    opts: ["She is leaving tomorrow.", "She will leave tomorrow.", "She has left already.", "She was leaving yesterday."],
-    ans: 1,
-    exp: "<strong>Future Indefinite</strong> (Simple Future) = will/shall + V1. 'She will leave tomorrow.' Note: 'She is leaving tomorrow' is Present Continuous used for a future plan — not Future Indefinite."
-  },
-  {
-    cat: "Tenses",
-    q: "'They <span class='highlight'>have eaten</span> at that restaurant many times.' — This Present Perfect expresses:",
-    opts: ["An action at a definite past time", "A repeated action in an unspecified period", "An action just completed", "An action during an unfinished period"],
-    ans: 1,
-    exp: "<strong>Repeated action in an unspecified period</strong>: 'many times' signals repetition but no specific date is given. If a date were mentioned ('last Tuesday'), Simple Past would be required instead."
-  },
-  {
-    cat: "Tenses",
-    q: "What is the correct structure for <strong>Past Indefinite</strong> (Simple Past) with a regular verb?",
-    opts: ["Subject + was/were + V-ing", "Subject + had + V3", "Subject + V2 (past form)", "Subject + did + V3"],
-    ans: 2,
-    exp: "<strong>Simple Past</strong> = subject + V2 (past form of verb). For regular verbs, add '-ed': 'She finished her work.' For irregular verbs, use the second form: 'She went home.' No auxiliary is needed in affirmative sentences."
-  },
-  {
-    cat: "Tenses",
-    q: "'My father <span class='highlight'>died</span> last year.' — Why is Simple Past used and not Present Perfect?",
-    opts: ["Because 'last year' is a specific, completed time reference", "Because death is always in Simple Past", "Because Present Perfect does not exist for this verb", "Because 'last year' means the year is still ongoing"],
-    ans: 0,
-    exp: "'<strong>Last year</strong>' is a <strong>definite, completed time reference</strong>. Simple Past is always required when the time of the action is specified. Present Perfect ('He has died') would only be used without a time reference."
-  },
-  {
-    cat: "Tenses",
-    q: "She <span class='highlight'>will be working</span> at this office for ten years by June. — What tense is this?",
-    opts: ["Future Indefinite", "Future Perfect", "Future Continuous", "Future Perfect Continuous"],
-    ans: 3,
-    exp: "<strong>Future Perfect Continuous</strong> = will have been + V-ing. It emphasizes the <em>duration</em> of an ongoing action up to a specific future point. Signal: 'for ten years by June'."
-  },
-  {
-    cat: "Tenses",
-    q: "Which pair of signal words fits <strong>Present Perfect</strong> best?",
-    opts: ["Yesterday / last week", "Tomorrow / next year", "Already / yet", "Now / at the moment"],
-    ans: 2,
-    exp: "<strong>Already</strong> and <strong>yet</strong> are classic Present Perfect signal words. Others include: just, ever, never, since, for, recently, so far. 'Yesterday' and 'last week' signal Simple Past; 'now/at the moment' signal Present Continuous."
-  },
-  {
-    cat: "Tenses",
-    q: "'We <span class='highlight'>crossed</span> the Channel yesterday.' — The verb form used is:",
-    opts: ["Past Participle (V3)", "Present Participle (V-ing)", "Simple Past (V2)", "Base form (V1)"],
-    ans: 2,
-    exp: "'Crossed' is the <strong>Simple Past form (V2)</strong> of the regular verb 'cross'. Simple Past uses V2 in affirmative sentences. 'Yesterday' confirms this is Simple Past — a completed action at a definite past time."
-  },
-  {
-    cat: "Tenses",
-    q: "Choose the sentence that correctly uses <strong>Present Indefinite</strong> vs <strong>Present Continuous</strong> together:",
-    opts: ["She is working every day and works right now.", "She works every day but right now she is sleeping.", "She has worked every day and is working always.", "She worked every day and was sleeping now."],
-    ans: 1,
-    exp: "'She <strong>works</strong> every day' = Present Indefinite (habitual). 'Right now she <strong>is sleeping</strong>' = Present Continuous (happening at this moment). This is the correct contrast: habitual action vs action at the moment of speaking."
-  },
-  {
-    cat: "Tenses",
-    q: "'I <span class='highlight'>had saved</span> my document before the computer crashed.' — The Past Perfect shows:",
-    opts: ["Two actions happening at the same time", "Saving happened after the crash", "Saving happened before the crash — the earlier of two past events", "Saving will happen in the future"],
-    ans: 2,
-    exp: "<strong>Past Perfect</strong> marks the <em>earlier</em> of two past events. Saving (Past Perfect) happened BEFORE the crash (Simple Past). The tense makes the sequence clear regardless of the order the events are mentioned."
-  },
-  {
-    cat: "Tenses",
-    q: "Which sentence uses <strong>Simple Present</strong> for a factual/general truth?",
-    opts: ["The sun is rising right now.", "The sun rises in the east.", "The sun has risen today.", "The sun rose yesterday."],
-    ans: 1,
-    exp: "<strong>Simple Present</strong> is used for <em>general truths, facts, and scientific laws</em> that are always true. 'The sun rises in the east' is a permanent fact. This is one of the key uses of Present Indefinite beyond habits."
-  },
-  {
-    cat: "Tenses",
-    q: "She <span class='highlight'>has been doing</span> this work for two hours. — What two things does this tense tell us?",
-    opts: ["The action is finished and was brief", "The action started in the past and is still continuing, with emphasis on duration", "The action will start in two hours", "The action happened twice in the past"],
-    ans: 1,
-    exp: "<strong>Present Perfect Continuous</strong> tells us: (1) the action <em>started in the past</em> and (2) is <em>still continuing now</em>, with emphasis on <em>duration</em>. 'For two hours' = duration. Compare: Present Perfect focuses on the result, not duration."
-  },
-  {
-    cat: "Tenses",
-    q: "What is the difference between '<strong>for</strong>' and '<strong>since</strong>' in Perfect tenses?",
-    opts: ["No difference — they are interchangeable", "'For' gives a duration; 'since' gives a starting point", "'For' gives a starting point; 'since' gives a duration", "'Since' is only used in Past Perfect"],
-    ans: 1,
-    exp: "<strong>'For'</strong> + duration (for two hours, for five years). <strong>'Since'</strong> + starting point (since morning, since 1984, since I was a child). E.g., 'I have lived here <em>for</em> ten years' / 'I have lived here <em>since</em> 2014.'"
-  },
-  {
-    cat: "Tenses",
-    q: "Identify the tense: 'By next month, she <span class='highlight'>will have completed</span> the project.'",
-    opts: ["Future Continuous", "Future Indefinite", "Future Perfect", "Present Perfect"],
-    ans: 2,
-    exp: "<strong>Future Perfect</strong> = will have + V3. It describes an action that will be <em>completed before a specific future time</em>. Signal: 'by next month'. The project will be done before that point arrives."
-  },
+  <!-- RESULTS -->
+  <div id="results-screen">
+    <div class="results-card">
+      <div class="score-ring" id="score-ring">
+        <div class="score-ring-inner">
+          <div class="score-pct" id="score-pct">0%</div>
+          <div class="score-pct-label">SCORE</div>
+        </div>
+      </div>
+      <div class="results-title" id="results-title">Quiz Complete!</div>
+      <div class="results-sub" id="results-sub"></div>
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-val green" id="correct-count">0</div>
+          <div class="stat-label">Correct</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val red" id="wrong-count">0</div>
+          <div class="stat-label">Wrong</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="total-count" style="color:var(--accent2)">40</div>
+          <div class="stat-label">Total</div>
+        </div>
+      </div>
+      <button class="restart-btn" onclick="restartQuiz()">Retake Quiz</button>
+    </div>
+  </div>
 
-  // CLAUSES & SENTENCE TYPES (Q14–23)
-  {
-    cat: "Clauses",
-    q: "'He tried hard <span class='highlight'>but</span> he did not succeed.' — What type of sentence is this?",
-    opts: ["Simple", "Complex", "Compound", "Compound-Complex"],
-    ans: 2,
-    exp: "<strong>Compound sentence</strong>: two independent clauses ('He tried hard' + 'he did not succeed') joined by the coordinating conjunction 'but'. Both clauses can stand alone, and there are no dependent clauses."
-  },
-  {
-    cat: "Clauses",
-    q: "Which of these is a <strong>subordinating conjunction</strong>?",
-    opts: ["And", "But", "Or", "Although"],
-    ans: 3,
-    exp: "'<strong>Although</strong>' is a subordinating conjunction — it introduces a dependent clause. 'And', 'But', 'Or' are all coordinating conjunctions (FANBOYS) that join independent clauses of equal rank."
-  },
-  {
-    cat: "Clauses",
-    q: "How many clauses are in: 'I stayed home because it was raining and I was tired.'?",
-    opts: ["One", "Two", "Three", "Four"],
-    ans: 2,
-    exp: "<strong>Three clauses</strong>: (1) 'I stayed home' — main clause; (2) 'because it was raining' — subordinate clause; (3) 'I was tired' — coordinate clause joined by 'and'. This is a Compound-Complex sentence."
-  },
-  {
-    cat: "Clauses",
-    q: "A subordinate clause introduced by 'because' expresses:",
-    opts: ["Time", "Condition", "Reason / Cause", "Contrast"],
-    ans: 2,
-    exp: "'<strong>Because</strong>' introduces a subordinate clause of <strong>reason/cause</strong>. Other subordinating conjunctions by type: Time (when, while, after, before, since); Condition (if, unless); Contrast (although, even though, whereas)."
-  },
-  {
-    cat: "Clauses",
-    q: "Identify the dependent clause: '<span class='highlight'>Although it was cold</span>, she went for a run.'",
-    opts: ["she went for a run", "Although it was cold", "went for a run", "it was cold she went"],
-    ans: 1,
-    exp: "'<strong>Although it was cold</strong>' is the <strong>dependent (subordinate) clause</strong> — introduced by the subordinating conjunction 'although', expressing contrast. It cannot stand alone. 'She went for a run' is the main (independent) clause."
-  },
-  {
-    cat: "Clauses",
-    q: "'<span class='highlight'>Whatever</span> decision you take, I can support you.' — Why is 'whatever' called a relative adjective and not a relative pronoun?",
-    opts: ["Because it starts the sentence", "Because it modifies a noun ('decision') rather than replacing one", "Because it joins two independent clauses", "Because it is always used in questions"],
-    ans: 1,
-    exp: "<strong>Relative adjective</strong>: 'whatever' <em>modifies</em> the noun 'decision' — it describes/qualifies it. A relative <em>pronoun</em> would replace the noun entirely. Compare: 'Whatever you decide' (pronoun — replaces noun) vs 'whatever decision you take' (adjective — modifies noun)."
-  },
-  {
-    cat: "Clauses",
-    q: "Which sentence is <strong>complex</strong>?",
-    opts: ["He sang and she danced.", "He sang beautifully.", "He sang because he was happy.", "He sang but she did not."],
-    ans: 2,
-    exp: "'He sang <strong>because he was happy</strong>' — <strong>complex sentence</strong>. 'Because he was happy' is a subordinate clause (dependent). Options A and D are compound sentences; B is a simple sentence."
-  },
-  {
-    cat: "Clauses",
-    q: "In Passive Voice, how many tenses are possible in English?",
-    opts: ["12", "10", "8", "6"],
-    ans: 2,
-    exp: "According to the course material, <strong>8 tenses</strong> exist in Passive Voice, compared to 12 in Active Voice. Not all tenses have a natural passive form — Future Perfect Continuous passive, for example, is rarely used in practice."
-  },
-  {
-    cat: "Clauses",
-    q: "What is the role of 'when' in: 'They rested <span class='highlight'>when</span> evening came.'?",
-    opts: ["Coordinating conjunction joining equal clauses", "Subordinating conjunction introducing a dependent clause of time", "Relative adjective modifying a noun", "Auxiliary verb"],
-    ans: 1,
-    exp: "'<strong>When</strong>' is a <strong>subordinating conjunction</strong> introducing a <em>dependent clause of time</em> ('when evening came'). It shows the time relationship between the two events: they rested at the point evening arrived."
-  },
-  {
-    cat: "Clauses",
-    q: "A compound sentence does NOT contain:",
-    opts: ["Coordinating conjunctions", "Independent clauses", "Any dependent (subordinate) clauses", "A subject and verb"],
-    ans: 2,
-    exp: "A <strong>compound sentence</strong> contains two or more independent clauses but <em>no dependent clauses</em>. The moment a dependent clause is added, it becomes compound-complex. This is the key distinguishing feature of a compound sentence."
-  },
-  {
-    cat: "Clauses",
-    q: "'She doesn't decide <span class='highlight'>which train</span> to take.' — 'which' here is best described as:",
-    opts: ["A relative pronoun replacing 'train'", "A question word", "A relative adjective modifying 'train'", "A coordinating conjunction"],
-    ans: 2,
-    exp: "'<strong>Which</strong>' is a <strong>relative adjective</strong> — it modifies the noun 'train'. It introduces the embedded clause while describing which train. If it replaced the noun entirely ('She doesn't decide which to take'), it would be a relative pronoun."
-  },
+  <script>
+    const questions = [
 
-  // TYPES OF VERBS (Q24–33)
-  {
-    cat: "Types of Verbs",
-    q: "Which sentence correctly demonstrates a <strong>transitive verb</strong>?",
-    opts: ["The baby slept.", "She arrived late.", "He kicked the ball.", "They laughed loudly."],
-    ans: 2,
-    exp: "'He kicked <strong>the ball</strong>' — 'kicked' is <strong>transitive</strong> because it has a direct object ('the ball'). 'Slept', 'arrived', and 'laughed' are intransitive — they have no direct object."
-  },
-  {
-    cat: "Types of Verbs",
-    q: "'I <span class='highlight'>am waiting</span>.' — What type of verb is 'am' and what tense does it help form?",
-    opts: ["Modal verb — Future Indefinite", "Auxiliary verb — Present Continuous", "Linking verb — Simple Present", "Stative verb — Present Perfect"],
-    ans: 1,
-    exp: "'<strong>Am</strong>' is an <strong>auxiliary (helping) verb</strong> that helps form the <strong>Present Continuous</strong> tense (am/is/are + V-ing). Auxiliary verbs must be conjugated: I am, she is, they are."
-  },
-  {
-    cat: "Types of Verbs",
-    q: "Which of the following is a <strong>modal verb</strong>?",
-    opts: ["Become", "Could", "Been", "Having"],
-    ans: 1,
-    exp: "'<strong>Could</strong>' is a <strong>modal verb</strong> — it expresses ability, possibility, or polite requests. The main modal verbs are: can, could, may, might, must, ought, shall, should, will, would. They never change form."
-  },
-  {
-    cat: "Types of Verbs",
-    q: "'The pillow <span class='highlight'>feels</span> soft.' vs 'Sofie <span class='highlight'>feels</span> the pillow.' — In the first sentence, 'feels' is a ___, in the second it is a ___.",
-    opts: ["Action verb / Linking verb", "Linking verb / Action verb", "Stative verb / Modal verb", "Auxiliary verb / Dynamic verb"],
-    ans: 1,
-    exp: "First: '<strong>linking verb</strong>' — connects subject ('pillow') to complement ('soft'). Second: '<strong>action (dynamic) verb</strong>' — Sofie is physically touching it. This demonstrates how the same verb can function differently based on context."
-  },
-  {
-    cat: "Types of Verbs",
-    q: "Which sentence contains an <strong>irregular verb</strong> in its past participle form?",
-    opts: ["She has finished her work.", "He has walked to school.", "They have gone to Paris.", "We have talked for hours."],
-    ans: 2,
-    exp: "'<strong>Gone</strong>' is the past participle of the irregular verb 'go' (go → went → gone). 'Finished', 'walked', and 'talked' are all regular past participles formed with '-ed'."
-  },
-  {
-    cat: "Types of Verbs",
-    q: "'Karl <span class='highlight'>believes</span> in himself.' — This is a stative verb. Which of the following is also a stative verb?",
-    opts: ["Run", "Jump", "Seem", "Build"],
-    ans: 2,
-    exp: "'<strong>Seem</strong>' is a stative verb — it describes a perceived state, not an action ('It seems difficult'). Stative verbs describe states of being, perception, or mental/emotional conditions. Run, jump, and build are all dynamic (action) verbs."
-  },
-  {
-    cat: "Types of Verbs",
-    q: "'I'm going to <span class='highlight'>give up</span> sugar this month.' — 'give up' means 'quit'. This is a:",
-    opts: ["Regular verb", "Stative verb", "Linking verb", "Phrasal verb"],
-    ans: 3,
-    exp: "<strong>Phrasal verb</strong>: verb ('give') + particle ('up') creating a meaning different from the original word. 'Give up' = quit/stop. Other common phrasal verbs: look up (search), break down (stop working), run into (meet by chance)."
-  },
-  {
-    cat: "Types of Verbs",
-    q: "Modal verbs are different from regular auxiliary verbs because they:",
-    opts: ["Must be conjugated for tense and person", "Never change form and always express meanings like ability, permission, or obligation", "Always take '-ing' after them", "Can only be used in questions"],
-    ans: 1,
-    exp: "<strong>Modal verbs never change form</strong> — 'can' stays 'can' regardless of subject (I can, she can, they can). They express ability, permission, possibility, necessity, or obligation. Regular auxiliaries like 'be' and 'have' must be conjugated (am/is/are/was)."
-  },
-  {
-    cat: "Types of Verbs",
-    q: "'<span class='highlight'>Amy kicks</span> the ball.' — 'kicks' is described as a dynamic verb because:",
-    opts: ["It describes a permanent state", "It connects subject to complement", "It describes a specific, temporary physical action", "It requires an auxiliary to form tense"],
-    ans: 2,
-    exp: "<strong>Dynamic (action) verbs</strong> describe specific, temporary actions or events. 'Kick' is a physical action — it has a clear start and end. Unlike stative verbs, dynamic verbs can be used in continuous tenses: 'Amy is kicking the ball.'"
-  },
-  {
-    cat: "Types of Verbs",
-    q: "Which sentence correctly uses a verb in the <strong>passive voice</strong>?",
-    opts: ["She wrote the report.", "The report was written by her.", "She is writing the report.", "She has written the report."],
-    ans: 1,
-    exp: "<strong>Passive voice</strong> = auxiliary 'be' + past participle (V3). 'The report <strong>was written</strong> by her.' The object of the active sentence ('the report') becomes the subject. The agent ('by her') may be mentioned or omitted."
-  },
+      // LIMITS (Q1–20)
 
-  // PARTS OF SPEECH & NOUNS (Q34–37)
-  {
-    cat: "Parts of Speech",
-    q: "In the sentence 'She <span class='highlight'>has done</span> this work', which word is the past participle?",
-    opts: ["She", "has", "done", "work"],
-    ans: 2,
-    exp: "'<strong>Done</strong>' is the <strong>past participle (V3)</strong> of the irregular verb 'do'. 'Has' is the auxiliary verb. Together they form Present Perfect tense. Past participles are used in perfect tenses and passive voice."
-  },
-  {
-    cat: "Parts of Speech",
-    q: "What part of speech is '<span class='highlight'>loudly</span>' in 'Rita coughed loudly'?",
-    opts: ["Adjective", "Noun", "Adverb", "Preposition"],
-    ans: 2,
-    exp: "'<strong>Loudly</strong>' is an <strong>adverb</strong> — it modifies the verb 'coughed', telling us how she coughed. Adverbs modify verbs, adjectives, or other adverbs. They often end in '-ly'. Note: intransitive verbs like 'cough' can be followed by adverbs but not direct objects."
-  },
-  {
-    cat: "Parts of Speech",
-    q: "In 'Can you tell me <span class='highlight'>what languages</span> he speaks?' — 'what' modifies 'languages'. What part of speech is it functioning as?",
-    opts: ["Relative Pronoun", "Subordinating Conjunction", "Relative Adjective", "Interrogative Adverb"],
-    ans: 2,
-    exp: "'<strong>What</strong>' is a <strong>relative adjective</strong> here — it modifies the noun 'languages'. It is not replacing the noun (pronoun) or joining equal clauses (conjunction). Relative adjectives: what, which, whatever, whichever."
-  },
-  {
-    cat: "Parts of Speech",
-    q: "The sentence 'The moon was bright' is best described as:",
-    opts: ["A complex sentence with one dependent clause", "A compound sentence with two independent clauses", "A simple sentence with one independent clause", "A compound-complex sentence"],
-    ans: 2,
-    exp: "'The moon was bright' is a <strong>simple sentence</strong> — it has exactly one independent clause (one subject: 'the moon', one verb: 'was') and no dependent clauses. Simple sentences can have phrases and modifiers but only one clause."
-  },
+      {
+        cat: "Limits",
+        q: "What is lim (x → ∞) 1/x ?",
+        opts: ["1", "0", "∞", "-1"],
+        ans: 1,
+        exp: "As x becomes very large, 1/x becomes very small → approaches 0."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → 3) (x² − 9)/(x − 3) equals:",
+        opts: ["0", "3", "6", "Does not exist"],
+        ans: 2,
+        exp: "Factor: (x-3)(x+3)/(x-3) → x+3 → 6."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → 0) sin(x)/x equals:",
+        opts: ["0", "∞", "1", "Undefined"],
+        ans: 2,
+        exp: "Standard limit: sin(x)/x → 1 as x → 0."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → a) c (constant) equals:",
+        opts: ["0", "a", "c", "∞"],
+        ans: 2,
+        exp: "Limit of a constant is the constant itself."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → a) [f(x) + g(x)] equals:",
+        opts: ["L+M", "L*M", "L/M", "None"],
+        ans: 0,
+        exp: "Sum rule: limit of sum = sum of limits."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → ∞) x/(x+1) equals:",
+        opts: ["0", "1", "∞", "-1"],
+        ans: 1,
+        exp: "Divide by x: 1/(1+1/x) → 1."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → 0) x² equals:",
+        opts: ["0", "1", "∞", "Undefined"],
+        ans: 0,
+        exp: "Direct substitution: 0² = 0."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → ∞) 5/x equals:",
+        opts: ["5", "0", "∞", "-5"],
+        ans: 1,
+        exp: "As denominator grows, fraction → 0."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → a) f(x) exists if:",
+        opts: ["LHL = RHL", "LHL ≠ RHL", "Only LHL exists", "Only RHL exists"],
+        ans: 0,
+        exp: "Limit exists only if left-hand limit = right-hand limit."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → ∞) (2x+1)/(x) equals:",
+        opts: ["2", "1", "0", "∞"],
+        ans: 0,
+        exp: "(2x+1)/x = 2 + 1/x → 2."
+      },
+      {
+        cat: "Limits",
+        q: "A vertical asymptote occurs when:",
+        opts: ["x → a, f(x) → ∞", "x → ∞, f(x) → a", "f(x)=0", "x=0"],
+        ans: 0,
+        exp: "If function grows infinitely near x=a, vertical asymptote."
+      },
+      {
+        cat: "Limits",
+        q: "A horizontal asymptote occurs when:",
+        opts: ["x → ∞, f(x) → L", "x → 0", "f(x)=0", "x=a"],
+        ans: 0,
+        exp: "Function approaches a constant as x → ∞."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → ∞) 1/(x²) equals:",
+        opts: ["1", "0", "∞", "-1"],
+        ans: 1,
+        exp: "Denominator grows faster → limit = 0."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → 0) 1/x equals:",
+        opts: ["0", "1", "∞ or -∞", "Undefined"],
+        ans: 2,
+        exp: "Approaches +∞ from right, -∞ from left."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → 2) (x+3) equals:",
+        opts: ["2", "3", "5", "∞"],
+        ans: 2,
+        exp: "Direct substitution: 2+3=5."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → ∞) (3x²)/(x²+1) equals:",
+        opts: ["3", "1", "0", "∞"],
+        ans: 0,
+        exp: "Divide by x² → 3/(1+1/x²) → 3."
+      },
+      {
+        cat: "Limits",
+        q: "Left-hand limit is denoted as:",
+        opts: ["lim x→a⁺", "lim x→a⁻", "lim x=a", "lim f(x)"],
+        ans: 1,
+        exp: "Minus sign (⁻) means approaching from left."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → ∞) e^x equals:",
+        opts: ["0", "1", "∞", "-∞"],
+        ans: 2,
+        exp: "Exponential grows rapidly → ∞."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → 0) e^x equals:",
+        opts: ["0", "1", "∞", "-1"],
+        ans: 1,
+        exp: "e⁰ = 1."
+      },
+      {
+        cat: "Limits",
+        q: "lim (x → ∞) ln(x) equals:",
+        opts: ["0", "1", "∞", "-∞"],
+        ans: 2,
+        exp: "Log increases slowly but → ∞."
+      },
 
-  // VOCABULARY (Q38–40)
-  {
-    cat: "Vocabulary",
-    q: "Which sentence uses <strong>'frigid'</strong> correctly to describe a person's manner?",
-    opts: ["She gave a frigid and warm welcome to the guests.", "His frigid response made everyone feel unwelcome.", "The frigid sunshine filled the room with warmth.", "She spoke in a frigid and enthusiastic tone."],
-    ans: 1,
-    exp: "<strong>Frigid</strong> describes either extreme cold (temperature) or an unfriendly, cold manner. 'His <em>frigid</em> response' = cold, distant, unwelcoming. The other options contradict the meaning by pairing 'frigid' with warmth or enthusiasm."
-  },
-  {
-    cat: "Vocabulary",
-    q: "'The abandoned building had a <span class='highlight'>sinister</span> atmosphere.' — What does sinister suggest here?",
-    opts: ["A cheerful, welcoming feeling", "A sense that something harmful or evil may be present", "A very bright and colourful appearance", "A feeling of warmth and safety"],
-    ans: 1,
-    exp: "<strong>Sinister</strong>: giving the impression that something harmful, threatening, or evil is happening or will happen. It creates a sense of foreboding or menace. E.g., 'a sinister smile', 'sinister motives', 'a sinister figure in the shadows'."
-  },
-  {
-    cat: "Vocabulary",
-    q: "Choose the sentence where <strong>'recline'</strong> is used correctly:",
-    opts: ["She reclined the answer on the test paper.", "He reclined the decision until next week.", "After a long day, she reclined on the sofa and closed her eyes.", "They reclined the entire building in one day."],
-    ans: 2,
-    exp: "<strong>Recline</strong>: to lean or lie back in a relaxed, horizontal or semi-horizontal position. Used for people resting, seats in planes/cars, or furniture. E.g., 'He reclined his seat on the flight.' / 'She reclined comfortably on the couch.'"
-  }
-];
+      // DOMAIN + CONTINUITY + DERIVATIVES (Q21–40)
 
-let currentQ = 0;
-let score = 0;
-let answered = false;
+      {
+        cat: "Domain",
+        q: "Natural domain of √(x-3):",
+        opts: ["x ≥ 3", "x ≤ 3", "All real", "x ≠ 3"],
+        ans: 0,
+        exp: "Inside root must be ≥ 0 → x ≥ 3."
+      },
+      {
+        cat: "Domain",
+        q: "Domain of 1/(x-5):",
+        opts: ["x ≠ 5", "x=5", "All real", "x≥5"],
+        ans: 0,
+        exp: "Denominator cannot be zero."
+      },
+      {
+        cat: "Domain",
+        q: "Domain of polynomial functions:",
+        opts: ["Finite", "All real", "Positive only", "Negative only"],
+        ans: 1,
+        exp: "Polynomials are defined everywhere."
+      },
+      {
+        cat: "Domain",
+        q: "Domain of 1/√x:",
+        opts: ["x>0", "x≥0", "All real", "x≠0"],
+        ans: 0,
+        exp: "√x must be >0 and denominator ≠0."
+      },
+      {
+        cat: "Continuity",
+        q: "A function is continuous at x=a if:",
+        opts: ["Limit exists", "f(a) exists", "Limit=f(a)", "All"],
+        ans: 3,
+        exp: "All three conditions must be satisfied."
+      },
+      {
+        cat: "Continuity",
+        q: "Jump discontinuity means:",
+        opts: ["Equal limits", "Unequal limits", "Infinite", "Removable"],
+        ans: 1,
+        exp: "LHL ≠ RHL."
+      },
+      {
+        cat: "Continuity",
+        q: "Function continuous everywhere:",
+        opts: ["Exponential", "Logarithmic", "Polynomial", "Step"],
+        ans: 2,
+        exp: "Polynomials have no breaks."
+      },
+      {
+        cat: "Continuity",
+        q: "Discontinuity of 1/x at x=0:",
+        opts: ["Removable", "Jump", "Infinite", "Point"],
+        ans: 2,
+        exp: "Function goes to infinity."
+      },
+      {
+        cat: "Derivatives",
+        q: "Derivative of constant:",
+        opts: ["1", "0", "x", "∞"],
+        ans: 1,
+        exp: "Constant slope is zero."
+      },
+      {
+        cat: "Derivatives",
+        q: "d/dx (x²):",
+        opts: ["x", "2x", "x²", "2"],
+        ans: 1,
+        exp: "Power rule → 2x."
+      },
+      {
+        cat: "Derivatives",
+        q: "Derivative of ln(x):",
+        opts: ["x", "1/x", "1/lnx", "x/lnx"],
+        ans: 1,
+        exp: "Standard derivative."
+      },
+      {
+        cat: "Derivatives",
+        q: "d/dx (3x+5):",
+        opts: ["3", "5", "x", "0"],
+        ans: 0,
+        exp: "Derivative of ax+b = a."
+      },
+      {
+        cat: "Derivatives",
+        q: "Slope of tangent equals:",
+        opts: ["Integral", "Limit", "Derivative", "Function"],
+        ans: 2,
+        exp: "Derivative gives slope."
+      },
+      {
+        cat: "Derivatives",
+        q: "Chain rule applies to:",
+        opts: ["Sum", "Composite functions", "Product", "Constant"],
+        ans: 1,
+        exp: "Used when function inside another."
+      },
+      {
+        cat: "Derivatives",
+        q: "Derivative of linear function y=mx+c:",
+        opts: ["c", "x", "y'", "m"],
+        ans: 3,
+        exp: "Slope = m."
+      },
+      {
+        cat: "Derivatives",
+        q: "Derivative represents:",
+        opts: ["Area", "Slope", "Volume", "Limit"],
+        ans: 1,
+        exp: "It is instantaneous rate of change."
+      },
+      {
+        cat: "Concept",
+        q: "Natural domain excludes:",
+        opts: ["Undefined values", "All real", "Only zero", "Only positive"],
+        ans: 0,
+        exp: "We remove undefined points."
+      },
+      {
+        cat: "Concept",
+        q: "Graph is continuous if you can draw without:",
+        opts: ["Ruler", "Lifting pencil", "Crossing axis", "Scaling"],
+        ans: 1,
+        exp: "No breaks → continuous."
+      },
+      {
+        cat: "Theorem",
+        q: "Intermediate Value Theorem requires:",
+        opts: ["Differentiable", "Continuous", "Linear", "Increasing"],
+        ans: 1,
+        exp: "Continuity is required."
+      },
+      {
+        cat: "Concept",
+        q: "Polynomial functions are:",
+        opts: ["Discontinuous", "Continuous", "Periodic", "Undefined"],
+        ans: 1,
+        exp: "Always smooth and continuous."
+      }
 
-function startQuiz() {
-  document.getElementById('start-screen').style.display = 'none';
-  document.getElementById('quiz-screen').style.display = 'block';
-  loadQuestion();
-}
+    ];
 
-function loadQuestion() {
-  const q = questions[currentQ];
-  answered = false;
+    let currentQ = 0;
+    let score = 0;
+    let answered = false;
 
-  document.getElementById('q-category').textContent = q.cat;
-  document.getElementById('q-number').textContent = String(currentQ + 1).padStart(2, '0');
-  document.getElementById('q-text').innerHTML = q.q;
-  document.getElementById('explanation-box').style.display = 'none';
-  document.getElementById('next-btn').style.display = 'none';
+    function startQuiz() {
+      document.getElementById('start-screen').style.display = 'none';
+      document.getElementById('quiz-screen').style.display = 'block';
+      loadQuestion();
+    }
 
-  const pct = ((currentQ) / questions.length) * 100;
-  document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('progress-label').textContent = `Question ${currentQ + 1} of ${questions.length}`;
+    function loadQuestion() {
+      const q = questions[currentQ];
+      answered = false;
 
-  const grid = document.getElementById('options-grid');
-  grid.innerHTML = '';
-  const letters = ['A', 'B', 'C', 'D'];
-  q.opts.forEach((opt, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'option-btn';
-    btn.innerHTML = `<span class="option-letter">${letters[i]}</span><span>${opt}</span>`;
-    btn.onclick = () => selectAnswer(i, btn);
-    grid.appendChild(btn);
-  });
-}
+      document.getElementById('q-category').textContent = q.cat;
+      document.getElementById('q-number').textContent = String(currentQ + 1).padStart(2, '0');
+      document.getElementById('q-text').innerHTML = q.q;
+      document.getElementById('explanation-box').style.display = 'none';
+      document.getElementById('next-btn').style.display = 'none';
 
-function selectAnswer(idx, btn) {
-  if (answered) return;
-  answered = true;
+      const pct = ((currentQ) / questions.length) * 100;
+      document.getElementById('progress-fill').style.width = pct + '%';
+      document.getElementById('progress-label').textContent = `Question ${currentQ + 1} of ${questions.length}`;
 
-  const q = questions[currentQ];
-  const btns = document.querySelectorAll('.option-btn');
+      const grid = document.getElementById('options-grid');
+      grid.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+      q.opts.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerHTML = `<span class="option-letter">${letters[i]}</span><span>${opt}</span>`;
+        btn.onclick = () => selectAnswer(i, btn);
+        grid.appendChild(btn);
+      });
+    }
 
-  btns.forEach(b => b.disabled = true);
+    function selectAnswer(idx, btn) {
+      if (answered) return;
+      answered = true;
 
-  if (idx === q.ans) {
-    btn.classList.add('correct');
-    score++;
-  } else {
-    btn.classList.add('wrong');
-    btns[q.ans].classList.add('correct');
-  }
+      const q = questions[currentQ];
+      const btns = document.querySelectorAll('.option-btn');
 
-  document.getElementById('score-display').textContent = `Score: ${score}`;
+      btns.forEach(b => b.disabled = true);
 
-  const expBox = document.getElementById('explanation-box');
-  expBox.innerHTML = '💡 ' + q.exp;
-  expBox.style.display = 'block';
+      if (idx === q.ans) {
+        btn.classList.add('correct');
+        score++;
+      } else {
+        btn.classList.add('wrong');
+        btns[q.ans].classList.add('correct');
+      }
 
-  const nextBtn = document.getElementById('next-btn');
-  nextBtn.style.display = 'inline-block';
-  if (currentQ === questions.length - 1) {
-    nextBtn.textContent = 'See Results →';
-  } else {
-    nextBtn.textContent = 'Next Question →';
-  }
-}
+      document.getElementById('score-display').textContent = `Score: ${score}`;
 
-function nextQuestion() {
-  currentQ++;
-  if (currentQ >= questions.length) {
-    showResults();
-  } else {
-    loadQuestion();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-}
+      const expBox = document.getElementById('explanation-box');
+      expBox.innerHTML = '💡 ' + q.exp;
+      expBox.style.display = 'block';
 
-function showResults() {
-  document.getElementById('quiz-screen').style.display = 'none';
-  const rs = document.getElementById('results-screen');
-  rs.style.display = 'flex';
+      const nextBtn = document.getElementById('next-btn');
+      nextBtn.style.display = 'inline-block';
+      if (currentQ === questions.length - 1) {
+        nextBtn.textContent = 'See Results →';
+      } else {
+        nextBtn.textContent = 'Next Question →';
+      }
+    }
 
-  const pct = Math.round((score / questions.length) * 100);
-  document.getElementById('score-pct').textContent = pct + '%';
-  document.getElementById('correct-count').textContent = score;
-  document.getElementById('wrong-count').textContent = questions.length - score;
+    function nextQuestion() {
+      currentQ++;
+      if (currentQ >= questions.length) {
+        showResults();
+      } else {
+        loadQuestion();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
 
-  // Animate ring
-  const ring = document.getElementById('score-ring');
-  ring.style.background = `conic-gradient(var(--accent) ${pct * 3.6}deg, var(--border) ${pct * 3.6}deg)`;
+    function showResults() {
+      document.getElementById('quiz-screen').style.display = 'none';
+      const rs = document.getElementById('results-screen');
+      rs.style.display = 'flex';
 
-  let title, sub;
-  if (pct >= 90) { title = "Outstanding! 🎉"; sub = "Excellent command of English grammar and vocabulary. You're well-prepared for your midterm!"; }
-  else if (pct >= 75) { title = "Great Work! 👏"; sub = "Strong performance! Review the questions you missed and you'll be fully ready for the exam."; }
-  else if (pct >= 60) { title = "Good Effort! 📚"; sub = "Solid foundation, but spend extra time on the topics where you struggled."; }
-  else if (pct >= 40) { title = "Keep Studying! 💪"; sub = "You have the basics down. Focus on reviewing tenses, clause types, and verb categories before your midterm."; }
-  else { title = "Need More Review 📖"; sub = "Go back through your notes on tenses, clauses, and verb types. Retake this quiz after reviewing!"; }
+      const pct = Math.round((score / questions.length) * 100);
+      document.getElementById('score-pct').textContent = pct + '%';
+      document.getElementById('correct-count').textContent = score;
+      document.getElementById('wrong-count').textContent = questions.length - score;
 
-  document.getElementById('results-title').textContent = title;
-  document.getElementById('results-sub').textContent = sub;
-}
+      // Animate ring
+      const ring = document.getElementById('score-ring');
+      ring.style.background = `conic-gradient(var(--accent) ${pct * 3.6}deg, var(--border) ${pct * 3.6}deg)`;
 
-function restartQuiz() {
-  currentQ = 0;
-  score = 0;
-  document.getElementById('results-screen').style.display = 'none';
-  document.getElementById('score-display').textContent = 'Score: 0';
-  document.getElementById('quiz-screen').style.display = 'block';
-  loadQuestion();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-</script>
+      let title, sub;
+      if (pct >= 90) { title = "Outstanding! 🎉"; sub = "Excellent command of English grammar and vocabulary. You're well-prepared for your midterm!"; }
+      else if (pct >= 75) { title = "Great Work! 👏"; sub = "Strong performance! Review the questions you missed and you'll be fully ready for the exam."; }
+      else if (pct >= 60) { title = "Good Effort! 📚"; sub = "Solid foundation, but spend extra time on the topics where you struggled."; }
+      else if (pct >= 40) { title = "Keep Studying! 💪"; sub = "You have the basics down. Focus on reviewing tenses, clause types, and verb categories before your midterm."; }
+      else { title = "Need More Review 📖"; sub = "Go back through your notes on tenses, clauses, and verb types. Retake this quiz after reviewing!"; }
+
+      document.getElementById('results-title').textContent = title;
+      document.getElementById('results-sub').textContent = sub;
+    }
+
+    function restartQuiz() {
+      currentQ = 0;
+      score = 0;
+      document.getElementById('results-screen').style.display = 'none';
+      document.getElementById('score-display').textContent = 'Score: 0';
+      document.getElementById('quiz-screen').style.display = 'block';
+      loadQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
 </body>
+
 </html>
