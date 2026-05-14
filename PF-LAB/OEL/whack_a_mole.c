@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define ROWS   6
-#define COLS   6
+#define ROWS 6
+#define COLS 6
 #define ROUNDS 10
 
 char grid[ROWS][COLS];
-int  moleRow, moleCol;
+int moleRow, moleCol;
 
 void clearGrid()
 {
@@ -26,7 +26,7 @@ void generateMole()
     moleRow = rand() % ROWS;
     moleCol = rand() % COLS;
 
-    grid[moleRow][moleCol] = 'M';
+    grid[moleRow][moleCol] = 'O';
 }
 
 void displayGrid()
@@ -48,8 +48,8 @@ void displayGrid()
 
         for (c = 0; c < COLS; c++)
         {
-            if (grid[r][c] == 'M')
-                printf(" ?|");
+            if (grid[r][c] == 'O')
+                printf(" O|");
             else
                 printf(" %c|", grid[r][c]);
         }
@@ -62,7 +62,7 @@ void displayGrid()
 int checkGuess(int guessRow, int guessCol)
 {
     int r = guessRow - 1;
-    int c = guessCol  - 1;
+    int c = guessCol - 1;
 
     if (r == moleRow && c == moleCol)
     {
@@ -108,9 +108,9 @@ int main()
 {
     int round, guessRow, guessCol;
     int result;
-    int hits   = 0;
+    int hits = 0;
     int misses = 0;
-    int score  = 0;
+    int score = 0;
 
     srand(time(NULL));
 
@@ -126,10 +126,10 @@ int main()
 
     for (round = 1; round <= ROUNDS; round++)
     {
-        printf(" - \n");
+        printf("  =========================================\n");
         printf("  Round %d of %d   |   Score: %d\n",
                round, ROUNDS, score);
-        printf(" - \n");
+        printf("  =========================================\n");
 
         clearGrid();
         generateMole();
@@ -137,12 +137,14 @@ int main()
 
         printf("  Where is the mole hiding?\n");
 
-        do {
+        do
+        {
             printf("  Enter Row    (1 to 6): ");
             scanf("%d", &guessRow);
         } while (guessRow < 1 || guessRow > 6);
 
-        do {
+        do
+        {
             printf("  Enter Column (1 to 6): ");
             scanf("%d", &guessCol);
         } while (guessCol < 1 || guessCol > 6);
