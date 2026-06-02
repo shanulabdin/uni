@@ -1,11 +1,13 @@
 #include <stdio.h>
 
-int factorial(int n) {
-  if(n == 0) return 1;
-  return n * factorial(n - 1);
+int isEven(int n) {
+    if (n % 2 == 0)
+        return 1;
+    else
+        return 0;
 }
 int main() {
-  factorial(5);
-
-  return 0;
+    printf("%d\n", isEven(4));
+    printf("%d\n", isEven(7));
+    return 0;
 }
