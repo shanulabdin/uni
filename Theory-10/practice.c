@@ -1,15 +1,23 @@
 #include <stdio.h>
-int findMax(int a, int b)
+int checkNumber(int num)
 {
-  if(a>b){
-    printf("Max = %d\n", a);
-  }else{
-    printf("Max = %d\n", b);
+  if (num > 0)
+  {
+    printf("Positive\n");
+  }
+  else if (num == 0)
+  {
+    printf("Zero\n");
+  }
+  else
+  {
+    printf("Negetive\n");
   }
 }
 int main()
 {
-  findMax(12,7);
-  findMax(3,9);
+  checkNumber(5);
+  checkNumber(-3);
+  checkNumber(0);
   return 0;
 }

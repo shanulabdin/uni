@@ -1,16 +1,12 @@
 #include <stdio.h>
 
 int main(){
-  int arr[6] = {4, 17, 2, 9, 31, 8};
+  int arr[8] = {3, 8, 5, 12, 7, 6, 1, 4};
 
-  int max = arr[0];
-
-  for(int i=0; i<6; i++){
-    if(arr[i]>max){
-      max = arr[i];
+  for(int i=0; i<8; i++){
+    if(arr[i] %2== 0){
+      printf("%d ", arr[i]);
     }
   }
-  
-  printf("Max = %d", max);
   return 0;
 }
