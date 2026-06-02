@@ -2,17 +2,18 @@
 
 int main()
 {
-  int arr[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-  int sum;
+  int arr[3][3] = {{3, 7, 2}, {8, 9, 5}, {4, 9, 6}};
+  int find = 9;
 
   for (int i = 0; i < 3; i++)
   {
-    sum = 0;
     for (int j = 0; j < 3; j++)
     {
-      sum = sum + arr[j][i];
+      if (arr[i][j] == find)
+      {
+        printf("Element is on arr[%d][%d]\n", i, j);
+      }
     }
-    printf("Col %d Sum = %d\n", i, sum);
   }
 
   return 0;
