@@ -2,19 +2,18 @@
 
 int main()
 {
-  int arr[3][3] = {{3, 7, 2}, {8, 1, 5}, {4, 9, 6}};
-  int max = arr[0][0];
+  int arr[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+  int sum;
 
   for (int i = 0; i < 3; i++)
   {
+    sum = 0;
     for (int j = 0; j < 3; j++)
     {
-      if(arr[i][j] > max){
-        max = arr[i][j];
-      }
+      sum = sum + arr[j][i];
     }
+    printf("Col %d Sum = %d\n", i, sum);
   }
 
-  printf("Max = %d", max);
   return 0;
 }
