@@ -1,28 +1,30 @@
 #include <stdio.h>
 
-int gcdOf(int a, int b)
+int countDigits(int n)
 {
-    if (b == 0)
-        return a;
+    if (n < 10){
+        printf("\nReached base case: n = %d\n", n);
+        return 1;
+    }
 
-    printf("Stack: a = %d, b = %d\n", a, b);
+    printf("\nStack Rolling: n = %d", n);
+    int count = 1 + countDigits(n/10);
 
-    return gcdOf(b, a % b);
+    printf("\nStack Unrolling: n = %d", n);
+
+    return count;
 }
 
 int main()
 {
-    int a, b;
+    int n;
 
-    printf("Enter value of a: ");
-    scanf("%d", &a);
+    printf("Enter value of n: ");
+    scanf("%d", &n);
 
-    printf("Enter value of b: ");
-    scanf("%d", &b);
+    int count = countDigits(n);
 
-    int gcd = gcdOf(a, b);
-
-    printf("\nGCD: %d\n", gcd);
+    printf("\nNumber of Digits: %d\n", count);
 
     return 0;
 }
