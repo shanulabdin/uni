@@ -36,7 +36,7 @@ void displayGrid()
     printf("\n    ");
     for (c = 0; c < COLS; c++)
     {
-        printf("  %d", c + 1);
+        printf("  0");
     }
     printf("\n");
 
@@ -44,7 +44,7 @@ void displayGrid()
 
     for (r = 0; r < ROWS; r++)
     {
-        printf("  %d |", r + 1);
+        printf("  0 |");
 
         for (c = 0; c < COLS; c++)
         {
