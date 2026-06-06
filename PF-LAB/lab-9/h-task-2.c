@@ -1,24 +1,30 @@
 #include <stdio.h>
 
-int calDel(int);
+int getLsd(int);
+int getMsd(int);
 
 int main(){
-  int order = 0, delivery = 0, total = 0;
-
-  printf("Enter total Bill: ");
-  scanf("%d", &order);
-
-  delivery = calDel(order);
-  total = delivery + order;
-
-  printf("Your Delivery charges will be: %d\n", delivery);
-  printf("Total: %d", total);
+  int num, lsd, msd;
+  printf("Enter a 3 digit number: ");
+  scanf("%d", &num);
+  
+  lsd = getLsd(num);
+  msd = getMsd(num);
+  
+  printf("Least Significant Digit: %d \n", lsd);
+  printf("Most Significant Digit: %d ", msd);
 
   return 0;
 }
 
-int calDel(int order){
-  int delivery = order > 1000 ? 150 : 0;
+int getLsd(int num){
+  int lsd = num % 10;
   
-  return delivery;
+  return lsd;
+}
+
+int getMsd(int num){
+  int msd = num / 100;
+
+  return msd;
 }

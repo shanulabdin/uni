@@ -11,14 +11,14 @@ int main(){
   delivery = calDel(order);
   total = delivery + order;
 
-  printf("Your Delivery charges will be: %d\n", delivery);
+  printf("\nDelivery charges: %d\n", delivery);
   printf("Total: %d", total);
 
   return 0;
 }
 
 int calDel(int order){
-  int delivery = order > 1000 ? 150 : 0;
+  int delivery = order >= 1000 ? 0 : 150;
   
   return delivery;
 }
