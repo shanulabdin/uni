@@ -15,7 +15,6 @@ int sumOf(int n)
     return sum;
 }
 
-
 int main() {
     int n, sum;
     printf("Enter value of n: ");
