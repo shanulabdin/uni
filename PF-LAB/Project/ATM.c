@@ -23,7 +23,7 @@ int  searchTransaction(float transactions[][MAX_TX], int user_index,
 
 int main(void)
 {
-    char  usernames[MAX_USERS][20]   = { "alice", "bob", "charlie", "diana", "eve" };
+    char  usernames[MAX_USERS][20]   = { "shan", "waiz", "muneeb", "umer", "saim" };
     int   pins[MAX_USERS]            = { 1111, 2222, 3333, 4444, 5555 };
     float balances[MAX_USERS]        = { 5000.0f, 12000.0f, 3500.0f, 8800.0f, 250.0f };
 
@@ -271,7 +271,7 @@ void showHistory(float transactions[][MAX_TX], int tx_count, int user_index)
                 printf("  [%d]  - PKR %.2f  (withdrawal)\n", i + 1, -transactions[user_index][i]);
         }
 
-        printf("\n  Search a transaction — enter amount: PKR ");
+        printf("\n  Search a transaction, enter amount: PKR ");
         scanf("%f", &target);
 
         result = searchTransaction(transactions, user_index, tx_count, target, 0);
