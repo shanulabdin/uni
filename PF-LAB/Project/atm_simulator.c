@@ -1,30 +1,26 @@
 /*
  * ============================================================
- *  ATM SIMULATOR — Programming Fundamentals Lab (CMC111)
- *  Language : C (C99/C11)
- *  Author   : Muhammad Shan Ul Abdin  |  IU02-0126-0212
- *  Instructor: Mehreen Kanwal
+ *  ATM SIMULATOR — Programming Fundamentals Lab
+ *  Language : Pure C (C99)
  * ============================================================
  *
- *  KEY CONCEPTS USED (for viva reference)
- *  --------------------------------------------------------------
- *  1. PARALLEL ARRAYS  – Five separate arrays (usernames, pins,
- *     balances, transactions, transaction_counts) share the same
- *     index to represent one "user record" without using structs.
+ *  KEY CONCEPTS (for viva)
+ *  ---------------------------------------------------------------
+ *  1. PARALLEL ARRAYS  — usernames, pins, balances, transactions,
+ *     and transaction_counts all share the same index.
+ *     Index 2 in every array = the same user "charlie".
  *
- *  2. 2D ARRAY  – transactions[5][10] stores up to 10 transaction
- *     amounts per user. Row = user index, Column = transaction slot.
+ *  2. 2D ARRAY  — transactions[5][10]: row = user, col = slot.
+ *     Positive value = deposit, negative = withdrawal.
  *
- *  3. POINTERS  – deposit() and withdraw() receive float* and int*
- *     arguments so they can modify the original arrays directly,
- *     not a local copy.
+ *  3. POINTERS  — deposit() and withdraw() take float* and int*
+ *     so they write back to the original array, not a copy.
  *
- *  4. RECURSION – searchTransaction() calls itself, shrinking the
- *     search range by one on every call until it finds the target
- *     or exhausts the history (base case: current_index >= count).
+ *  4. RECURSION — searchTransaction() calls itself with
+ *     current_index+1 until it finds the target or runs out.
  *
- *  5. LOOPS     – while() drives the login gate and the main menu;
- *     for() iterates over users and transaction lists.
+ *  5. LOOPS  — while() for menus, login, and input validation;
+ *     for() to walk arrays.
  * ============================================================
  */
 
@@ -32,103 +28,76 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* ── Constants ─────────────────────────────────────────────── */
 #define MAX_USERS  5
-#define MAX_TX     10      /* max transactions stored per user  */
+#define MAX_TX     10
 
-/* ── Function Prototypes ────────────────────────────────────── */
-
-/* UI / display */
+/* ── Prototypes ─────────────────────────────────────────────── */
 void printHeader(void);
 void printDivider(void);
 void printMainMenu(void);
-void clearBuffer(void);
 
-/* Auth */
 int  loginUser(char usernames[][20], int pins[], int max);
 
-/* Core banking logic — note pointer parameters */
 void checkBalance(float balances[], int user_index);
-void deposit(float *balance, float transactions[][MAX_TX],
-             int *tx_count, int user_index);
-void withdraw(float *balance, float transactions[][MAX_TX],
-              int *tx_count, int user_index);
-void showHistory(float transactions[][MAX_TX],
-                 int tx_count, int user_index);
+void deposit(float *balance, float transactions[][MAX_TX], int *tx_count, int user_index);
+void withdraw(float *balance, float transactions[][MAX_TX], int *tx_count, int user_index);
+void showHistory(float transactions[][MAX_TX], int tx_count, int user_index);
 void changePin(int pins[], int user_index);
+void recordTransaction(float transactions[][MAX_TX], int *tx_count, int user_index, float amount);
 
-/* Utility */
-void recordTransaction(float transactions[][MAX_TX],
-                       int *tx_count, int user_index, float amount);
-
-/*
- * RECURSIVE SEARCH — required by specification.
- *
- * How it works:
- *   Base case 1 : current_index >= count  → not found, return -1
- *   Base case 2 : transactions[user_index][current_index] == target
- *                 → found, return current_index
- *   Recursive   : call self with current_index + 1
- */
-int searchTransaction(float transactions[][MAX_TX], int user_index,
-                      int count, float target, int current_index);
+int  searchTransaction(float transactions[][MAX_TX], int user_index,
+                       int count, float target, int current_index);
 
 /* ── Main ───────────────────────────────────────────────────── */
 int main(void)
 {
-    /*
-     * DATABASE — parallel arrays.
-     * Index 0 in every array belongs to the same user.
-     * No structs needed; the shared index IS the record link.
-     */
-    char  usernames[MAX_USERS][20] = {
-        "alice", "bob", "charlie", "diana", "eve"
-    };
-    int   pins[MAX_USERS]          = { 1111, 2222, 3333, 4444, 5555 };
-    float balances[MAX_USERS]      = { 5000.0f, 12000.0f,
-                                       3500.0f,  8800.0f, 250.0f };
+    /* DATABASE — parallel arrays, same index = same user */
+    char  usernames[MAX_USERS][20]   = { "alice", "bob", "charlie", "diana", "eve" };
+    int   pins[MAX_USERS]            = { 1111, 2222, 3333, 4444, 5555 };
+    float balances[MAX_USERS]        = { 5000.0f, 12000.0f, 3500.0f, 8800.0f, 250.0f };
 
     /*
-     * 2D ARRAY — transactions[user][slot].
-     * Positive value = deposit, negative value = withdrawal.
-     * Pre-loaded with some history for demo purposes.
+     * 2D ARRAY — transactions[user][slot]
+     * Row = user index, Column = transaction slot
+     * Positive = deposit, Negative = withdrawal
      */
     float transactions[MAX_USERS][MAX_TX] = {
-        {  500.0f, -200.0f,  300.0f, 0,0,0,0,0,0,0 },  /* alice   */
-        { 1000.0f, -500.0f,    0,    0,0,0,0,0,0,0 },  /* bob     */
-        {  200.0f,    0,       0,    0,0,0,0,0,0,0 },  /* charlie */
-        {  800.0f, -100.0f, -50.0f,  0,0,0,0,0,0,0 },  /* diana   */
-        {  100.0f,    0,       0,    0,0,0,0,0,0,0 }   /* eve     */
+        {  500.0f, -200.0f,  300.0f, 0,0,0,0,0,0,0 },
+        { 1000.0f, -500.0f,    0,    0,0,0,0,0,0,0 },
+        {  200.0f,    0,       0,    0,0,0,0,0,0,0 },
+        {  800.0f, -100.0f, -50.0f,  0,0,0,0,0,0,0 },
+        {  100.0f,    0,       0,    0,0,0,0,0,0,0 }
     };
-
-    /* How many transactions each user already has in history */
     int transaction_counts[MAX_USERS] = { 3, 2, 1, 3, 1 };
 
-    int  logged_in_user = -1;   /* index of authenticated user  */
-    int  choice;                /* menu selection               */
+    int logged_in_user;
+    int choice;
+    int running = 1;   /* outer loop flag */
 
     printHeader();
 
-    /* ── Outer loop: keeps returning to login after logout ── */
-    while (1)
+    /* Outer loop — return here after each logout */
+    while (running)
     {
         logged_in_user = loginUser(usernames, pins, MAX_USERS);
 
         if (logged_in_user == -1)
         {
-            printf("\n  Account locked. Exiting.\n");
+            printf("\n  Too many failed attempts. Goodbye.\n");
+            running = 0;
             break;
         }
 
         printf("\n  Welcome, %s!\n", usernames[logged_in_user]);
 
-        /* ── Inner loop: main menu for logged-in user ──────── */
-        while (1)
+        int logged_in = 1;
+
+        /* Inner loop — main menu */
+        while (logged_in)
         {
             printMainMenu();
             printf("  Enter choice: ");
-            if (scanf("%d", &choice) != 1) choice = -1;
-            clearBuffer();   /* flush leftover newline / junk  */
+            scanf("%d", &choice);
 
             switch (choice)
             {
@@ -138,11 +107,9 @@ int main(void)
 
                 case 2:
                     /*
-                     * POINTER USAGE:
-                     * &balances[logged_in_user] passes the address of
-                     * this user's balance cell so withdraw() can modify
-                     * the original array value, not a local copy.
-                     * Same pattern for transaction_counts.
+                     * POINTER: &balances[logged_in_user] passes the
+                     * address of this user's balance so withdraw() can
+                     * update the original value, not a local copy.
                      */
                     withdraw(&balances[logged_in_user],
                              transactions,
@@ -170,35 +137,32 @@ int main(void)
                 case 6:
                     printf("\n  Logged out. Goodbye, %s!\n\n",
                            usernames[logged_in_user]);
-                    goto next_login;   /* break inner, re-enter outer */
+                    logged_in = 0;
+                    break;
 
                 default:
-                    printf("\n  Invalid option. Try again.\n");
+                    printf("\n  Invalid option. Please enter 1-6.\n");
             }
         }
-        next_login:;   /* label for the goto above */
     }
 
-    printf("\n  Thank you for using the ATM. Goodbye!\n");
+    printf("  Thank you for using the ATM!\n");
     return 0;
 }
 
-/* ═══════════════════════════════════════════════════════════
- *  UI / DISPLAY FUNCTIONS
- * ═══════════════════════════════════════════════════════════ */
+/* ── Display ────────────────────────────────────────────────── */
 
 void printHeader(void)
 {
     printf("\n");
-    printf("   ...................................  \n");
-    printf("  |        C-BANK  ATM  v1.0         |  \n");
-    printf("  |         PF Lab  CMC111           |  \n");
-    printf("   ...................................  \n");
+    printf("  ================================\n");
+    printf("         C-BANK  ATM  v1.0        \n");
+    printf("  ================================\n");
 }
 
 void printDivider(void)
 {
-    printf("   ...................................  \n");
+    printf("  --------------------------------\n");
 }
 
 void printMainMenu(void)
@@ -214,82 +178,54 @@ void printMainMenu(void)
     printDivider();
 }
 
-/*
- * clearBuffer — flushes everything left in stdin after a scanf.
- * Without this, a stray '\n' would be read by the next scanf and
- * cause menus to skip or behave erratically.
- */
-void clearBuffer(void)
-{
-    while (getchar() != '\n');
-}
-
-/* ═══════════════════════════════════════════════════════════
- *  AUTH — LOGIN
- * ═══════════════════════════════════════════════════════════ */
+/* ── Login ──────────────────────────────────────────────────── */
 
 int loginUser(char usernames[][20], int pins[], int max)
 {
-    char  input_name[20];
-    int   input_pin;
-    int   attempts = 0;
-    int   i;
+    char input_name[20];
+    int  input_pin;
+    int  attempts = 0;
+    int  i;
 
     printf("\n");
     printDivider();
 
-    /* Allow up to 3 login attempts */
     while (attempts < 3)
     {
         printf("  Username: ");
-        scanf("%19s", input_name);
-        clearBuffer();
+        scanf("%s", input_name);
 
         printf("  PIN     : ");
-        if (scanf("%d", &input_pin) != 1)
-        {
-            clearBuffer();
-            printf("  Invalid PIN format.\n\n");
-            attempts++;
-            continue;
-        }
-        clearBuffer();
+        scanf("%d", &input_pin);
 
-        /* Linear search through username array */
         for (i = 0; i < max; i++)
         {
-            if (strcmp(usernames[i], input_name) == 0 &&
-                pins[i] == input_pin)
-            {
-                return i;   /* authentication successful */
-            }
+            if (strcmp(usernames[i], input_name) == 0 && pins[i] == input_pin)
+                return i;
         }
 
         attempts++;
-        printf("  Incorrect credentials. Attempt %d/3.\n\n", attempts);
+        printf("  Wrong username or PIN. Attempt %d/3.\n\n", attempts);
     }
 
-    return -1;   /* all attempts exhausted */
+    return -1;
 }
 
-/* ═══════════════════════════════════════════════════════════
- *  BANKING FUNCTIONS
- * ═══════════════════════════════════════════════════════════ */
+/* ── Balance ────────────────────────────────────────────────── */
 
 void checkBalance(float balances[], int user_index)
 {
     printDivider();
-    printf("  Current Balance:  PKR %.2f\n", balances[user_index]);
+    printf("  Balance: PKR %.2f\n", balances[user_index]);
     printDivider();
 }
 
-/* ── DEPOSIT ──────────────────────────────────────────────────
- * Parameters:
- *   float *balance   — pointer to this user's cell in balances[].
- *                      Using *balance = *balance + amount modifies
- *                      the original array directly.
- *   int   *tx_count  — pointer to transaction_counts[user_index].
- *                      Incrementing *tx_count updates the real counter.
+/* ── Deposit ────────────────────────────────────────────────── */
+/*
+ * POINTER USAGE:
+ * 'balance' is a pointer to balances[user_index] in main().
+ * Writing *balance += amount changes the original array value.
+ * Same idea for tx_count — *tx_count++ updates the real counter.
  */
 void deposit(float *balance, float transactions[][MAX_TX],
              int *tx_count, int user_index)
@@ -297,66 +233,64 @@ void deposit(float *balance, float transactions[][MAX_TX],
     float amount;
 
     printDivider();
-    printf("  Enter deposit amount: PKR ");
-    if (scanf("%f", &amount) != 1) { clearBuffer(); return; }
-    clearBuffer();
 
-    if (amount <= 0.0f)
+    /* while loop re-prompts until a valid amount is entered */
+    amount = 0;
+    while (amount <= 0)
     {
-        printf("  Error: Amount must be positive.\n");
-        return;
+        printf("  Deposit amount: PKR ");
+        scanf("%f", &amount);
+
+        if (amount <= 0)
+            printf("  Amount must be greater than zero. Try again.\n");
     }
 
-    *balance += amount;   /* dereference pointer to update original */
+    *balance += amount;
     recordTransaction(transactions, tx_count, user_index, amount);
 
-    printf("  Deposited PKR %.2f successfully.\n", amount);
+    printf("  Deposited PKR %.2f\n", amount);
     printf("  New Balance: PKR %.2f\n", *balance);
     printDivider();
 }
 
-/* ── WITHDRAW ─────────────────────────────────────────────────
- * Negative amount is stored so history shows cash-out at a glance.
- */
+/* ── Withdraw ───────────────────────────────────────────────── */
+
 void withdraw(float *balance, float transactions[][MAX_TX],
               int *tx_count, int user_index)
 {
     float amount;
+    int   valid;
 
     printDivider();
-    printf("  Enter withdrawal amount: PKR ");
-    if (scanf("%f", &amount) != 1) { clearBuffer(); return; }
-    clearBuffer();
 
-    if (amount <= 0.0f)
+    valid = 0;
+    while (valid == 0)
     {
-        printf("  Error: Amount must be positive.\n");
-        return;
-    }
-    if (amount > *balance)
-    {
-        printf("  Error: Insufficient funds. Balance: PKR %.2f\n",
-               *balance);
-        return;
+        printf("  Withdrawal amount: PKR ");
+        scanf("%f", &amount);
+
+        if (amount <= 0)
+            printf("  Amount must be greater than zero. Try again.\n");
+        else if (amount > *balance)
+            printf("  Insufficient funds. Balance is PKR %.2f. Try again.\n", *balance);
+        else
+            valid = 1;
     }
 
     *balance -= amount;
     recordTransaction(transactions, tx_count, user_index, -amount);
 
-    printf("  Withdrawn PKR %.2f successfully.\n", amount);
+    printf("  Withdrawn PKR %.2f\n", amount);
     printf("  New Balance: PKR %.2f\n", *balance);
     printDivider();
 }
 
-/* ═══════════════════════════════════════════════════════════
- *  recordTransaction
- *  Adds 'amount' to the user's transaction row.
- *
- *  OVERFLOW HANDLING — shift strategy:
- *  If the slot is full (tx_count == MAX_TX), shift all entries
- *  left by one (oldest is discarded) and write the new entry at
- *  the last position, keeping the count at MAX_TX.
- * ═══════════════════════════════════════════════════════════ */
+/* ── Record Transaction ─────────────────────────────────────── */
+/*
+ * 2D ARRAY: transactions[user_index][slot]
+ * If the row is full (10 entries), shift everything left by one
+ * so the oldest entry is dropped and the new one fits at the end.
+ */
 void recordTransaction(float transactions[][MAX_TX],
                        int *tx_count, int user_index, float amount)
 {
@@ -364,39 +298,28 @@ void recordTransaction(float transactions[][MAX_TX],
 
     if (*tx_count < MAX_TX)
     {
-        /*
-         * 2D ARRAY ACCESS:
-         * transactions[user_index][*tx_count] targets the next
-         * empty column in this user's row.
-         */
         transactions[user_index][*tx_count] = amount;
-        (*tx_count)++;   /* update the real counter via pointer */
+        (*tx_count)++;
     }
     else
     {
-        /* Shift left: index 0 is dropped, oldest first */
+        /* Shift left — drop oldest, make room at the end */
         for (i = 0; i < MAX_TX - 1; i++)
-        {
             transactions[user_index][i] = transactions[user_index][i + 1];
-        }
+
         transactions[user_index][MAX_TX - 1] = amount;
-        /* tx_count stays at MAX_TX — no increment needed */
     }
 }
 
-/* ═══════════════════════════════════════════════════════════
- *  showHistory
- *  Lists every transaction for the active user and then
- *  demonstrates the recursive search by asking for a target.
- * ═══════════════════════════════════════════════════════════ */
-void showHistory(float transactions[][MAX_TX],
-                 int tx_count, int user_index)
+/* ── Transaction History + Recursive Search ─────────────────── */
+
+void showHistory(float transactions[][MAX_TX], int tx_count, int user_index)
 {
     int   i, result;
     float target;
 
     printDivider();
-    printf("  Transaction History (last %d recorded):\n\n", tx_count);
+    printf("  Transaction History (%d recorded):\n\n", tx_count);
 
     if (tx_count == 0)
     {
@@ -407,107 +330,92 @@ void showHistory(float transactions[][MAX_TX],
         for (i = 0; i < tx_count; i++)
         {
             if (transactions[user_index][i] >= 0)
-                printf("  [%d]  + PKR %.2f  (deposit)\n",
-                       i + 1, transactions[user_index][i]);
+                printf("  [%d]  + PKR %.2f  (deposit)\n",    i + 1,  transactions[user_index][i]);
             else
-                printf("  [%d]  - PKR %.2f  (withdrawal)\n",
-                       i + 1, -transactions[user_index][i]);
+                printf("  [%d]  - PKR %.2f  (withdrawal)\n", i + 1, -transactions[user_index][i]);
         }
 
-        /* ── Demonstrate recursive search ───────────────── */
-        printf("\n  Search a transaction amount (e.g. 500): PKR ");
-        if (scanf("%f", &target) != 1) { clearBuffer(); return; }
-        clearBuffer();
+        printf("\n  Search a transaction — enter amount: PKR ");
+        scanf("%f", &target);
 
         /*
-         * RECURSIVE CALL:
-         * Start at index 0. The function will keep calling itself
-         * with current_index + 1 until it finds 'target' or
-         * reaches tx_count (base case → return -1).
+         * RECURSIVE SEARCH:
+         * Starts at index 0, checks one slot per call.
+         * If not found, calls itself with current_index + 1.
+         * Stops when index reaches tx_count (base case → -1)
+         * or when a match is found (base case → return index).
          */
-        result = searchTransaction(transactions, user_index,
-                                   tx_count, target, 0);
+        result = searchTransaction(transactions, user_index, tx_count, target, 0);
 
         if (result == -1)
-            printf("  Amount PKR %.2f not found in history.\n", target);
+            printf("  PKR %.2f not found in history.\n", target);
         else
-            printf("  Found PKR %.2f at transaction slot [%d].\n",
-                   target, result + 1);
+            printf("  Found PKR %.2f at slot [%d].\n", target, result + 1);
     }
 
     printDivider();
 }
 
-/* ═══════════════════════════════════════════════════════════
- *  RECURSIVE FUNCTION — searchTransaction
+/* ── Recursive Search ───────────────────────────────────────── */
+/*
+ * HOW RECURSION WORKS HERE:
  *
- *  Purpose : Search transactions[user_index][0..count-1] for
- *            a value equal to 'target'.
+ *   Base case 1: current_index >= count
+ *                Walked off the end — not found, return -1.
  *
- *  Base cases:
- *    1. current_index >= count  → exhausted, return -1
- *    2. value matches target    → return current_index
+ *   Base case 2: transactions[user_index][current_index] == target
+ *                Match found — return the index.
  *
- *  Recursive case:
- *    Neither base case hit → call self with current_index + 1.
- *    Each call works on a smaller sub-array (one fewer element).
+ *   Recursive case: neither matched — call self with index + 1.
  *
- *  Call stack example (user has 3 tx: [500, -200, 300], target=300):
- *    search(..., 3, 300.0, 0) → 500 != 300 → recurse
- *    search(..., 3, 300.0, 1) → -200 != 300 → recurse
- *    search(..., 3, 300.0, 2) → 300 == 300  → return 2
- * ═══════════════════════════════════════════════════════════ */
+ * Example (3 transactions: [500, -200, 300], searching for 300):
+ *   call(index=0): 500 != 300  → call(index=1)
+ *   call(index=1): -200 != 300 → call(index=2)
+ *   call(index=2): 300 == 300  → return 2
+ */
 int searchTransaction(float transactions[][MAX_TX], int user_index,
                       int count, float target, int current_index)
 {
-    /* Base case 1: walked past the end without a match */
     if (current_index >= count)
         return -1;
 
-    /* Base case 2: current slot matches target */
     if (transactions[user_index][current_index] == target)
         return current_index;
 
-    /* Recursive case: check the next slot */
-    return searchTransaction(transactions, user_index,
-                             count, target, current_index + 1);
+    return searchTransaction(transactions, user_index, count, target, current_index + 1);
 }
 
-/* ═══════════════════════════════════════════════════════════
- *  changePin
- * ═══════════════════════════════════════════════════════════ */
+/* ── Change PIN ─────────────────────────────────────────────── */
+
 void changePin(int pins[], int user_index)
 {
-    int current, new_pin, confirm;
+    int current_pin;
+    int new_pin;
+    int confirm_pin;
 
     printDivider();
-    printf("  Current PIN  : ");
-    if (scanf("%d", &current) != 1) { clearBuffer(); return; }
-    clearBuffer();
+    printf("  Current PIN: ");
+    scanf("%d", &current_pin);
 
-    if (current != pins[user_index])
+    if (current_pin != pins[user_index])
     {
-        printf("  Incorrect PIN. Change cancelled.\n");
+        printf("  Incorrect PIN. Cancelled.\n");
         return;
     }
 
-    printf("  New PIN      : ");
-    if (scanf("%d", &new_pin) != 1) { clearBuffer(); return; }
-    clearBuffer();
-
-    printf("  Confirm PIN  : ");
-    if (scanf("%d", &confirm) != 1) { clearBuffer(); return; }
-    clearBuffer();
-
-    if (new_pin != confirm)
+    /* Loop until new PIN and confirmation match */
+    new_pin = 0;
+    confirm_pin = -1;
+    while (new_pin != confirm_pin)
     {
-        printf("  PINs do not match. Change cancelled.\n");
-        return;
-    }
-    if (new_pin < 1000 || new_pin > 9999)
-    {
-        printf("  PIN must be a 4-digit number.\n");
-        return;
+        printf("  New PIN (4 digits): ");
+        scanf("%d", &new_pin);
+
+        printf("  Confirm PIN       : ");
+        scanf("%d", &confirm_pin);
+
+        if (new_pin != confirm_pin)
+            printf("  PINs do not match. Try again.\n");
     }
 
     pins[user_index] = new_pin;
