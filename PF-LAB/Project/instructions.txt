@@ -1,0 +1,43 @@
+# Project: C-Based ATM Simulator Specification
+
+Act as an expert C programmer. Help me write a robust, modular, and academic-grade ATM Simulator for a Programming Fundamentals course. 
+
+## 1. Constraints & Rules
+- Language: Pure C (C99 or C11 standard).
+- No Objects, Classes, or Structs. 
+- Standard Libraries Only: Use only <stdio.h>, <stdlib.h>, and <string.h>. Do not use platform-specific libraries like <conio.h>.
+- Required Concepts: 
+  - 1D and 2D Arrays (acting as our database and transaction history).
+  - Functions (Clear separation of concerns: UI/Display functions vs. Logic functions).
+  - Pointers (Used to pass array elements by reference to update data).
+  - Recursion (Required for a specific search function).
+  - Loops (While loops for main application state and menus).
+
+## 2. Data Structure (Parallel Arrays)
+Do not use structs. Represent the database using these exact parallel arrays initialized with mock data for 5 users:
+- char usernames[5][20]
+- int pins[5]
+- float balances[5]
+- float transactions[5][10] (2D array storing up to 10 transactions per user)
+- int transaction_counts[5] (Tracks the current number of recorded transactions for each user)
+
+## 3. Mandatory Features
+1. User Login: Prompt for username and PIN. Authenticate by matching inputs against the parallel arrays. (Note: Do not mask the PIN input with '*' to ensure cross-platform compatibility in standard C; just accept it normally).
+2. Main Menu: Loop a menu for logged-in users with options: 1. Check Balance, 2. Withdraw, 3. Deposit, 4. Transaction History, 5. Change PIN, 6. Logout.
+3. Deposit/Withdraw: 
+   - Validate inputs (no negative amounts, withdrawals cannot exceed balance).
+   - Update the `balances` array using pointers passed into the function.
+   - Record the transaction amount in the `transactions` 2D array (use negative values for withdrawals, positive for deposits). Prevent array overflow if a user exceeds 10 transactions by capping it or shifting older elements.
+4. Transaction History: Print the logged transactions for the active user.
+5. Recursive Search Function: Create a function with this exact signature:
+   `int searchTransaction(float transactions[][10], int user_index, int count, float target, int current_index)`
+   It must recursively search the user's transaction history for a specific amount. Return the index if found, or -1 if not.
+
+## 4. Coding Standards & Robustness
+- Use `#define` for constants (e.g., #define MAX_USERS 5, #define MAX_TX 10).
+- Provide clean function prototypes at the top of the file.
+- Prevent input buffer bugs: Explicitly clear the input buffer after every `scanf` call using `while(getchar() != '\n');` to handle trailing newlines or accidental character inputs in numeric menus.
+- Keep UI text clean, minimal, and well-aligned.
+
+## 5. Deliverable
+Provide the complete, compilable source code in a single code block. Include clear comments explaining how the Pointers, 2D Arrays, and the Recursive function work so I can easily explain the logic to my instructor.
