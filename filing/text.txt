@@ -1,0 +1,41 @@
+1. 
+FILE *fp;
+fp = fopen("student.txt", "w");
+
+2.  c
+
+3.  b, fclose()
+
+4. b, End of file
+
+5. #include <stdio.h>
+
+int main() {
+    FILE *fp;
+
+    fp = fopen("data.txt", "w");
+
+    fprintf(fp, "Hello");
+
+    fclose(fp);
+
+    return 0;
+}
+
+6. Pakistan
+
+7. false, it wipes all the data
+
+8. Ali 20
+
+9. fscanf()
+
+10. you dont do "r", when writing in a file, do "w" instead
+
+11. c, "a"
+
+12.   fp = fopen("data.txt", "r");
+
+  if (fp == NULL) {
+      printf("File cannot be opened");
+  }

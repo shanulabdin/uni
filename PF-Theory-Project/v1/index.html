@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stockroom Ledger — Inventory Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #1B2430;
+    --navy-soft: #243042;
+    --paper: #F7F4ED;
+    --paper-line: #E4DFD2;
+    --slate: #3E5C76;
+    --amber: #D4A24E;
+    --green: #5C8A6A;
+    --rust: #C0594C;
+    --ink: #2A2E35;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  body{
+    background: var(--navy);
+    font-family: var(--body);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 32px 24px 64px;
+  }
+
+  /* ---------------- HEADER ---------------- */
+  .masthead{
+    max-width: 1200px;
+    margin: 0 auto 36px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    border-bottom: 2px solid var(--amber);
+    padding-bottom: 18px;
+  }
+  .masthead h1{
+    font-family: var(--display);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--paper);
+    letter-spacing: 0.5px;
+  }
+  .masthead h1 span{ color: var(--amber); }
+  .masthead .sub{
+    font-family: var(--mono);
+    color: #9FB0C2;
+    font-size: 0.85rem;
+    text-align:right;
+  }
+  .masthead .sub .date{
+    display:block;
+    color: var(--amber);
+    margin-top: 4px;
+  }
+
+  /* ---------------- GRID ---------------- */
+  .ledger-grid{
+    max-width: 1200px;
+    margin: 0 auto;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  @media (max-width: 880px){
+    .ledger-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------------- TICKET CARD ---------------- */
+  .ticket{
+    position: relative;
+    background: var(--paper);
+    border-radius: 6px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    overflow: hidden;
+  }
+
+  /* perforated edge — signature element */
+  .ticket::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height: 10px;
+    background-image: radial-gradient(circle, var(--navy) 3px, transparent 3.5px);
+    background-size: 22px 10px;
+    background-position: 8px -5px;
+    background-repeat: repeat-x;
+  }
+
+  .ticket-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding: 22px 26px 14px;
+    border-bottom: 1px dashed var(--paper-line);
+  }
+
+  .ticket-code{
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: #8C8472;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .ticket-head h2{
+    font-family: var(--display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-top: 2px;
+  }
+
+  .stamp{
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1.5px solid currentColor;
+    text-transform: uppercase;
+    transform: rotate(-4deg);
+  }
+  .stamp.create{ color: var(--green); }
+  .stamp.read{ color: var(--slate); }
+  .stamp.update{ color: var(--amber); }
+  .stamp.delete{ color: var(--rust); }
+
+  /* ---------------- FORM ---------------- */
+  .ticket-body{ padding: 22px 26px 26px; }
+
+  .field{ margin-bottom: 16px; }
+  .field label{
+    display:block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #6E6857;
+    margin-bottom: 6px;
+  }
+  .field input{
+    width: 100%;
+    font-family: var(--body);
+    font-size: 0.95rem;
+    padding: 10px 12px;
+    border: 1.5px solid var(--paper-line);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--ink);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .field input:focus{
+    outline: none;
+    border-color: var(--slate);
+    box-shadow: 0 0 0 3px rgba(62,92,118,0.15);
+  }
+
+  .field-row{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  /* ---------------- BUTTON ---------------- */
+  .btn{
+    width:100%;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.4px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--paper);
+    transition: transform 0.08s ease, opacity 0.15s ease;
+    margin-top: 4px;
+  }
+  .btn:hover{ opacity: 0.92; }
+  .btn:active{ transform: scale(0.99); }
+
+  .btn.create{ background: var(--green); }
+  .btn.read{ background: var(--slate); }
+  .btn.update{ background: var(--amber); color: var(--navy); }
+  .btn.delete{ background: var(--rust); }
+
+  /* ---------------- OUTPUT / RECEIPT ---------------- */
+  .receipt{
+    margin-top: 16px;
+    background: var(--navy-soft);
+    border-radius: 4px;
+    padding: 14px 16px;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: #D7E0EA;
+    white-space: pre-wrap;
+    line-height: 1.6;
+    min-height: 24px;
+    border-left: 3px solid var(--paper-line);
+  }
+  .receipt.empty{ color: #5C6B7C; font-style: italic; }
+  .receipt.success{ border-left-color: var(--green); }
+  .receipt.error{ border-left-color: var(--rust); }
+
+  footer{
+    max-width:1200px;
+    margin: 40px auto 0;
+    text-align:center;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: #5C6B7C;
+  }
+</style>
+</head>
+<body>
+
+  <div class="masthead">
+    <h1>Stockroom <span>Ledger</span></h1>
+    <div class="sub">
+      INVENTORY CONSOLE
+      <span class="date">database.txt</span>
+    </div>
+  </div>
+
+  <div class="ledger-grid">
+
+    <!-- CREATE -->
+    <div class="ticket">
+      <div class="ticket-head">
+        <div>
+          <div class="ticket-code">Operation 01 · Intake</div>
+          <h2>Add Item</h2>
+        </div>
+        <div class="stamp create">New</div>
+      </div>
+      <div class="ticket-body">
+        <form id="form-add">
+          <div class="field-row">
+            <div class="field">
+              <label for="add-id">Item ID</label>
+              <input type="number" id="add-id" required>
+            </div>
+            <div class="field">
+              <label for="add-qty">Quantity</label>
+              <input type="number" id="add-qty" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="add-name">Item Name</label>
+            <input type="text" id="add-name" required>
+          </div>
+          <div class="field">
+            <label for="add-manufacturer">Manufacturer / Supplier</label>
+            <input type="text" id="add-manufacturer" required>
+          </div>
+          <button class="btn create" type="submit">Add to Ledger</button>
+        </form>
+        <div class="receipt empty" id="out-add">Awaiting entry…</div>
+      </div>
+    </div>
+
+    <!-- READ / SEARCH -->
+    <div class="ticket">
+      <div class="ticket-head">
+        <div>
+          <div class="ticket-code">Operation 02 · Lookup</div>
+          <h2>Search Item</h2>
+        </div>
+        <div class="stamp read">Find</div>
+      </div>
+      <div class="ticket-body">
+        <form id="form-search">
+          <div class="field">
+            <label for="search-id">Item ID</label>
+            <input type="number" id="search-id" required>
+          </div>
+          <button class="btn read" type="submit">Look Up</button>
+        </form>
+        <div class="receipt empty" id="out-search">No lookup performed yet.</div>
+      </div>
+    </div>
+
+    <!-- UPDATE -->
+    <div class="ticket">
+      <div class="ticket-head">
+        <div>
+          <div class="ticket-code">Operation 03 · Revision</div>
+          <h2>Update Item</h2>
+        </div>
+        <div class="stamp update">Revise</div>
+      </div>
+      <div class="ticket-body">
+        <form id="form-update">
+          <div class="field-row">
+            <div class="field">
+              <label for="update-id">Item ID</label>
+              <input type="number" id="update-id" required>
+            </div>
+            <div class="field">
+              <label for="update-qty">New Quantity</label>
+              <input type="number" id="update-qty" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="update-name">New Name</label>
+            <input type="text" id="update-name" required>
+          </div>
+          <div class="field">
+            <label for="update-manufacturer">New Manufacturer / Supplier</label>
+            <input type="text" id="update-manufacturer" required>
+          </div>
+          <button class="btn update" type="submit">Apply Revision</button>
+        </form>
+        <div class="receipt empty" id="out-update">No changes submitted yet.</div>
+      </div>
+    </div>
+
+    <!-- DELETE -->
+    <div class="ticket">
+      <div class="ticket-head">
+        <div>
+          <div class="ticket-code">Operation 04 · Removal</div>
+          <h2>Delete Item</h2>
+        </div>
+        <div class="stamp delete">Void</div>
+      </div>
+      <div class="ticket-body">
+        <form id="form-delete">
+          <div class="field">
+            <label for="delete-id">Item ID</label>
+            <input type="number" id="delete-id" required>
+          </div>
+          <button class="btn delete" type="submit">Remove from Ledger</button>
+        </form>
+        <div class="receipt empty" id="out-delete">No item removed yet.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>Backed by a C99 engine · parallel arrays · database.txt</footer>
+
+<script>
+  // Sends form data to the Flask bridge and writes the C program's
+  // text output into the matching "receipt" box.
+  function postForm(url, formData, outputId){
+    const box = document.getElementById(outputId);
+    box.className = "receipt";
+    box.textContent = "Working…";
+
+    fetch(url, { method: "POST", body: formData })
+      .then(res => res.json())
+      .then(data => {
+        const text = data.output || "";
+        box.textContent = text;
+        if (text.indexOf("SUCCESS") === 0) {
+          box.className = "receipt success";
+        } else if (text.indexOf("ERROR") === 0) {
+          box.className = "receipt error";
+        } else {
+          box.className = "receipt";
+        }
+      })
+      .catch(err => {
+        box.className = "receipt error";
+        box.textContent = "ERROR: Could not reach server (" + err + ")";
+      });
+  }
+
+  // ----- ADD -----
+  document.getElementById("form-add").addEventListener("submit", function(e){
+    e.preventDefault();
+    const fd = new FormData();
+    fd.append("item_id", document.getElementById("add-id").value);
+    fd.append("item_name", document.getElementById("add-name").value);
+    fd.append("manufacturer", document.getElementById("add-manufacturer").value);
+    fd.append("quantity", document.getElementById("add-qty").value);
+    postForm("/add", fd, "out-add");
+  });
+
+  // ----- SEARCH -----
+  document.getElementById("form-search").addEventListener("submit", function(e){
+    e.preventDefault();
+    const fd = new FormData();
+    fd.append("item_id", document.getElementById("search-id").value);
+    postForm("/search", fd, "out-search");
+  });
+
+  // ----- UPDATE -----
+  document.getElementById("form-update").addEventListener("submit", function(e){
+    e.preventDefault();
+    const fd = new FormData();
+    fd.append("item_id", document.getElementById("update-id").value);
+    fd.append("item_name", document.getElementById("update-name").value);
+    fd.append("manufacturer", document.getElementById("update-manufacturer").value);
+    fd.append("quantity", document.getElementById("update-qty").value);
+    postForm("/update", fd, "out-update");
+  });
+
+  // ----- DELETE -----
+  document.getElementById("form-delete").addEventListener("submit", function(e){
+    e.preventDefault();
+    const fd = new FormData();
+    fd.append("item_id", document.getElementById("delete-id").value);
+    postForm("/delete", fd, "out-delete");
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+# Project: Basic C Inventory Database Engine with Web Frontend
+
+Act as an expert C programmer. Help me design and implement a persistent Database/Inventory Management System for a introductory Programming Fundamentals theory course. 
+
+## 1. Project Architecture & Constraints
+- Backend: Must be written in pure standard C (C99 standard). 
+- NO Complex Structures: Do not use structs, objects, classes, or external databases. 
+- NO Advanced Prebuilt Functions: Do not use buffer-clearing functions like `getchar()`, `fflush()`, or advanced string manipulation functions like `strtok()`, `sscanf()`, or `sprintf()`. Stick strictly to basic tools a student learns in the first semester: `printf()`, `scanf()`, `strcmp()`, and `strcpy()`.
+- Persistence (File I/O): Must use only the most basic C file functions: `fopen()`, `fprintf()`, `fscanf()`, `fclose()`, and `feof()`. All data must save to and load from a plain text file named `database.txt`.
+- Frontend Integration: I am using a lightweight Python script to bridge a custom HTML/CSS web page to this C program. The C program must receive data from the frontend strictly via command-line arguments (`argc` and `argv`). 
+
+## 2. Data Structure (Basic Parallel Arrays)
+The system tracks items using 4 fields: Item ID (integer), Item Name (string), Manufacturer/Supplier (string), and Quantity (integer). Inside C, manage this data using these exact parallel arrays:
+- int item_ids[100];
+- char item_names[100][50];
+- char manufacturers[100][50];
+- int quantities[100];
+- int total_records = 0; // Global counter for active records
+
+On startup, the C program must open `database.txt`, use a basic `while(!feof(...))` loop with `fscanf` to load all data into these arrays, and close the file. On any data change (add/update/delete), the program must overwrite `database.txt` with the fresh array data using `fprintf`.
+
+## 3. Mandatory CRUD Features (The 4 Musts)
+The C program must look at `argv[1]` to know which action to perform:
+1. Create ("add"): Check if the requested ID already exists in the `item_ids` array. If unique, append the ID, Name, Manufacturer, and Quantity to the arrays, then save to the file.
+2. Read/Search ("search"): Use a standard `for` loop to look for a target ID. Print its details if found, or print an error if not.
+3. Update ("update"): Find the target ID using a loop, then modify its Name, Manufacturer, or Quantity based on the incoming arguments.
+4. Delete ("delete"): Find the target ID, remove it from the array tracking, shift all subsequent array elements up by one index to close the gap, decrement `total_records`, and save the fresh state to the file.
+
+## 4. Deliverables Required
+Please provide:
+1. The full, clean C source code utilizing parallel arrays and basic file handling. Keep the code strictly at a beginner/student level using straightforward if-else statements and basic loops. Include simple comments explaining the file writing and array-shifting logic.
+2. A small, simple Python script (using Flask) that acts as the bridge, showing exactly how it takes web inputs and executes this compiled C binary via command line.
+3. A premium-looking, clean HTML/CSS UI dashboard layout template with clear input fields for these 4 CRUD operations.

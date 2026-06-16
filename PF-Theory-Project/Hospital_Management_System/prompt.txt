@@ -1,0 +1,38 @@
+# Project: C-Based Hospital Patient Database Engine with Web Frontend
+
+Act as an expert C programmer. Help my group design and implement a persistent Patient Management System for an introductory Programming Fundamentals theory course. 
+
+## 1. Project Architecture & Constraints
+- Backend: Written in pure standard C (C99 standard). 
+- NO Complex Structures: Do not use structs, objects, classes, or external databases. Everything must use basic parallel arrays.
+- NO Advanced Prebuilt Functions: Do not use buffer-clearing functions like `getchar()`, `fflush()`, or advanced string/input parsing functions like `strtok()`, `sscanf()`, or `sprintf()`. Stick strictly to standard student-level functions: `printf()`, `scanf()`, `strcmp()`, and `strcpy()`.
+- Persistence (File I/O): Use only basic C file functions: `fopen()`, `fprintf()`, `fscanf()`, `fclose()`, and `feof()`. All data must persistently save to and load from a plain text file named `patients.txt`.
+- Frontend Integration: My group members are building a beautiful web dashboard using HTML and CSS. We will use a lightweight Python Flask script as a local middleman to bridge the website to this C program. The C program must receive data from the frontend strictly via command-line arguments (`argc` and `argv`).
+
+## 2. Data Structure (9 Parallel Arrays)
+The system tracks patients across 9 specific fields. In the C program, manage this data using these exact parallel arrays capped at 100 slots:
+- int patient_ids[100];
+- char names[100][50];
+- char phones[100][20];
+- int ages[100];
+- char diseases[100][50];
+- char doctors[100][50];
+- int room_numbers[100];
+- char admission_dates[100][20];
+- char statuses[100][20]; // e.g., "Admitted" or "Discharged"
+- int total_records = 0;   // Global tracker for active records
+
+On startup, the C program must open `patients.txt`, use a basic loop with `fscanf` to load all existing patients into these parallel arrays, and close the file. On any data change (add/update/delete), the program must completely overwrite `patients.txt` with the fresh array data using `fprintf`.
+
+## 3. Mandatory CRUD Features (The 4 Musts)
+The C program must look at the first argument (`argv[1]`) to determine which action to take:
+1. Create ("add"): Check if the requested Patient ID already exists in the `patient_ids` array to prevent duplicates. If unique, append the ID, Name, Phone, Age, Disease, Doctor, Room, Date, and Status ("Admitted") to the arrays, then save to the file.
+2. Read/Search ("search"): Use a standard `for` loop to look for a target Patient ID. Print its complete details to the console if found, or print a clear error message if not.
+3. Update ("update"): Find the target Patient ID using a loop, then modify specific fields (like updating their Room Number, changing Assigned Doctor, or altering Status from "Admitted" to "Discharged") based on the incoming command-line arguments.
+4. Delete ("delete"): Find the target Patient ID, completely remove it from the array tracking by shifting all subsequent elements up by one index to close the gap, decrement `total_records`, and save the clean state back to `patients.txt`.
+
+## 4. Deliverables Required
+Please provide:
+1. The complete, clean C source code utilizing the 9 parallel arrays and basic file handling. Keep the code strictly at a beginner level using basic loops and straightforward if-else statements. Include simple, human-like comments explaining the file parsing and the array-shifting logic during a deletion.
+2. A small, lightweight Python Flask script that acts as the bridge. It must accept web form inputs from the frontend and execute this compiled C binary using standard system execution tools, passing the inputs as command-line arguments.
+3. A premium-looking, clean HTML/CSS UI dashboard layout template with clear input fields and buttons to easily trigger these 4 operations.

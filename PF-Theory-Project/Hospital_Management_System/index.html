@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wardline — Patient Records</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F7F7F4;
+    --panel: #FFFFFF;
+    --ink: #1B2B2D;
+    --muted: #6E7E80;
+    --teal: #0F4C5C;
+    --teal-light: #E4F1F0;
+    --mint: #2A9D8F;
+    --coral: #E76F51;
+    --line: #E4E4E0;
+    --shadow: 0 10px 30px -15px rgba(15,76,92,0.25);
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    font-family:'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ===== Top Bar ===== */
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 22px 40px;
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+
+  .brand-mark{
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--teal);
+    display:flex; align-items:center; justify-content:center;
+    color: #fff;
+    font-family:'Outfit', sans-serif;
+    font-weight:800;
+    font-size: 18px;
+  }
+
+  .brand-name{
+    font-family:'Outfit', sans-serif;
+    font-weight:700;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .brand-tag{
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .pulse{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--mint);
+    font-weight:600;
+  }
+
+  .dot{
+    width:8px; height:8px; border-radius:50%;
+    background: var(--mint);
+    box-shadow: 0 0 0 0 rgba(42,157,143,0.5);
+    animation: pulse 1.8s infinite;
+  }
+
+  @keyframes pulse{
+    0%{ box-shadow: 0 0 0 0 rgba(42,157,143,0.45); }
+    70%{ box-shadow: 0 0 0 8px rgba(42,157,143,0); }
+    100%{ box-shadow: 0 0 0 0 rgba(42,157,143,0); }
+  }
+
+  /* ===== Layout ===== */
+  .layout{
+    display:grid;
+    grid-template-columns: 240px 1fr;
+    max-width: 1280px;
+    margin: 0 auto;
+    gap: 28px;
+    padding: 32px 40px 60px;
+  }
+
+  /* ===== Sidebar ===== */
+  .sidebar{
+    display:flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .sidebar-label{
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin: 4px 0 8px 14px;
+    font-weight:600;
+  }
+
+  .nav-btn{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight:500;
+    font-family:'Inter', sans-serif;
+    cursor:pointer;
+    text-align:left;
+    transition: all .15s ease;
+  }
+
+  .nav-btn:hover{
+    background: var(--teal-light);
+  }
+
+  .nav-btn.active{
+    background: var(--teal);
+    color:#fff;
+    box-shadow: var(--shadow);
+  }
+
+  .nav-icon{
+    width: 28px; height:28px;
+    border-radius: 8px;
+    display:flex; align-items:center; justify-content:center;
+    background: rgba(15,76,92,0.08);
+    font-size: 15px;
+  }
+
+  .nav-btn.active .nav-icon{
+    background: rgba(255,255,255,0.18);
+  }
+
+  /* ===== Main panel ===== */
+  .main{
+    display:flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .panel{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px 30px;
+    box-shadow: var(--shadow);
+  }
+
+  .panel-header{
+    display:flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed var(--line);
+    padding-bottom: 16px;
+  }
+
+  .panel-title{
+    font-family:'Outfit', sans-serif;
+    font-weight:700;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+
+  .panel-sub{
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .chart-id{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--mint);
+    background: var(--teal-light);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight:600;
+  }
+
+  /* ===== Form Grid ===== */
+  .form-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 20px;
+  }
+
+  .field{
+    display:flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .field.full{
+    grid-column: 1 / -1;
+  }
+
+  label{
+    font-size: 12px;
+    font-weight:600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  input, select{
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    background: #FCFCFB;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+
+  input:focus, select:focus{
+    border-color: var(--mint);
+    box-shadow: 0 0 0 3px rgba(42,157,143,0.15);
+  }
+
+  .actions{
+    margin-top: 22px;
+    display:flex;
+    gap: 12px;
+  }
+
+  button.submit{
+    border:none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-family:'Outfit', sans-serif;
+    font-weight:600;
+    font-size: 14px;
+    cursor:pointer;
+    transition: transform .12s ease, opacity .15s ease;
+  }
+
+  button.submit:active{
+    transform: scale(0.98);
+  }
+
+  .btn-primary{ background: var(--teal); color:#fff; }
+  .btn-primary:hover{ opacity:0.92; }
+
+  .btn-danger{ background: var(--coral); color:#fff; }
+  .btn-danger:hover{ opacity:0.92; }
+
+  .btn-ghost{
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+  .btn-ghost:hover{ background: var(--teal-light); }
+
+  /* ===== Console output ===== */
+  .console{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13px;
+    background: var(--teal);
+    color: #DCF3EF;
+    border-radius: 12px;
+    padding: 18px 20px;
+    min-height: 64px;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  .console .ok{ color:#7FE6CB; }
+  .console .err{ color:#FFB4A1; }
+
+  .console-label{
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-weight:600;
+  }
+
+  /* ===== Table ===== */
+  table{
+    width:100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  thead th{
+    text-align:left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  tbody td{
+    padding: 12px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  tbody tr:hover{ background: var(--teal-light); }
+
+  .status-pill{
+    font-size: 11px;
+    font-weight:600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    display:inline-block;
+  }
+
+  .status-Admitted{ background:#E4F1F0; color: var(--mint); }
+  .status-Discharged{ background:#FBE9E5; color: var(--coral); }
+
+  .id-mono{ font-family:'JetBrains Mono', monospace; font-weight:600; color: var(--teal); }
+
+  /* ===== Hidden views ===== */
+  .view{ display:none; }
+  .view.active{ display:block; }
+
+  @media (max-width: 880px){
+    .layout{ grid-template-columns: 1fr; }
+    .sidebar{ flex-direction: row; overflow-x: auto; }
+    .form-grid{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark">W</div>
+      <div>
+        <div class="brand-name">Wardline</div>
+        <div class="brand-tag">Patient Records Console</div>
+      </div>
+    </div>
+    <div class="pulse"><span class="dot"></span> Connected to engine</div>
+  </div>
+
+  <div class="layout">
+
+    <!-- ===== Sidebar Navigation ===== -->
+    <div class="sidebar">
+      <div class="sidebar-label">Records</div>
+      <button class="nav-btn active" data-view="view-list"><span class="nav-icon">&#128203;</span> Ward Overview</button>
+      <button class="nav-btn" data-view="view-add"><span class="nav-icon">&#10010;</span> Admit Patient</button>
+      <button class="nav-btn" data-view="view-search"><span class="nav-icon">&#128269;</span> Find Patient</button>
+      <button class="nav-btn" data-view="view-update"><span class="nav-icon">&#9998;</span> Update Record</button>
+      <button class="nav-btn" data-view="view-delete"><span class="nav-icon">&#10006;</span> Discharge / Delete</button>
+    </div>
+
+    <!-- ===== Main Content ===== -->
+    <div class="main">
+
+      <!-- LIST VIEW -->
+      <div class="view active" id="view-list">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Ward Overview</div>
+              <div class="panel-sub">All patients currently on file</div>
+            </div>
+            <button class="submit btn-ghost" onclick="loadList()">Refresh</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th><th>Name</th><th>Age</th><th>Disease</th>
+                <th>Doctor</th><th>Room</th><th>Admitted</th><th>Status</th><th>Phone</th>
+              </tr>
+            </thead>
+            <tbody id="patient-table-body">
+              <tr><td colspan="9" style="color:var(--muted); text-align:center; padding:24px;">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ADD VIEW -->
+      <div class="view" id="view-add">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Admit Patient</div>
+              <div class="panel-sub">Create a new record</div>
+            </div>
+            <div class="chart-id">add</div>
+          </div>
+          <form id="form-add">
+            <div class="form-grid">
+              <div class="field"><label>Patient ID</label><input type="number" name="id" required></div>
+              <div class="field"><label>Full Name</label><input type="text" name="name" required></div>
+              <div class="field"><label>Phone Number</label><input type="text" name="phone" required></div>
+              <div class="field"><label>Age</label><input type="number" name="age" required></div>
+              <div class="field"><label>Disease / Complaint</label><input type="text" name="disease" required></div>
+              <div class="field"><label>Assigned Doctor</label><input type="text" name="doctor" required></div>
+              <div class="field"><label>Room Number</label><input type="number" name="room" required></div>
+              <div class="field"><label>Admission Date</label><input type="date" name="date" required></div>
+            </div>
+            <div class="actions">
+              <button type="submit" class="submit btn-primary">Add Record</button>
+            </div>
+          </form>
+          <div style="margin-top:20px;">
+            <div class="console-label">Engine Response</div>
+            <div class="console" id="output-add">Waiting for input…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEARCH VIEW -->
+      <div class="view" id="view-search">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Find Patient</div>
+              <div class="panel-sub">Look up a record by ID</div>
+            </div>
+            <div class="chart-id">search</div>
+          </div>
+          <form id="form-search">
+            <div class="form-grid">
+              <div class="field full"><label>Patient ID</label><input type="number" name="id" required></div>
+            </div>
+            <div class="actions">
+              <button type="submit" class="submit btn-primary">Search</button>
+            </div>
+          </form>
+          <div style="margin-top:20px;">
+            <div class="console-label">Engine Response</div>
+            <div class="console" id="output-search">Waiting for input…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UPDATE VIEW -->
+      <div class="view" id="view-update">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Update Record</div>
+              <div class="panel-sub">Modify one field for a given patient</div>
+            </div>
+            <div class="chart-id">update</div>
+          </div>
+          <form id="form-update">
+            <div class="form-grid">
+              <div class="field"><label>Patient ID</label><input type="number" name="id" required></div>
+              <div class="field">
+                <label>Field to Update</label>
+                <select name="field" required>
+                  <option value="room">Room Number</option>
+                  <option value="doctor">Assigned Doctor</option>
+                  <option value="status">Status</option>
+                  <option value="phone">Phone Number</option>
+                  <option value="disease">Disease / Complaint</option>
+                </select>
+              </div>
+              <div class="field full"><label>New Value</label><input type="text" name="value" required placeholder="e.g. Discharged, 14, Dr_Hina"></div>
+            </div>
+            <div class="actions">
+              <button type="submit" class="submit btn-primary">Update Record</button>
+            </div>
+          </form>
+          <div style="margin-top:20px;">
+            <div class="console-label">Engine Response</div>
+            <div class="console" id="output-update">Waiting for input…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DELETE VIEW -->
+      <div class="view" id="view-delete">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Discharge / Delete</div>
+              <div class="panel-sub">Permanently remove a record</div>
+            </div>
+            <div class="chart-id">delete</div>
+          </div>
+          <form id="form-delete">
+            <div class="form-grid">
+              <div class="field full"><label>Patient ID</label><input type="number" name="id" required></div>
+            </div>
+            <div class="actions">
+              <button type="submit" class="submit btn-danger">Delete Record</button>
+            </div>
+          </form>
+          <div style="margin-top:20px;">
+            <div class="console-label">Engine Response</div>
+            <div class="console" id="output-delete">Waiting for input…</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+  // ===== Sidebar navigation =====
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const views = document.querySelectorAll('.view');
+
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      navBtns.forEach(b => b.classList.remove('active'));
+      views.forEach(v => v.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.view).classList.add('active');
+      if(btn.dataset.view === 'view-list'){ loadList(); }
+    });
+  });
+
+  // ===== Helper to send a form to a Flask route =====
+  async function sendForm(url, formData, outputBox){
+    outputBox.textContent = "Working…";
+    try{
+      const res = await fetch(url, { method: "POST", body: formData });
+      const data = await res.json();
+      const text = data.output || "(no output)";
+      const isError = text.toLowerCase().includes("error");
+      outputBox.innerHTML = `<span class="${isError ? 'err' : 'ok'}">${text}</span>`;
+    }catch(err){
+      outputBox.innerHTML = `<span class="err">Error: could not reach server (${err})</span>`;
+    }
+  }
+
+  // ===== Add =====
+  document.getElementById('form-add').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const out = document.getElementById('output-add');
+    await sendForm('/add', formData, out);
+    loadList();
+  });
+
+  // ===== Search =====
+  document.getElementById('form-search').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const out = document.getElementById('output-search');
+    await sendForm('/search', formData, out);
+  });
+
+  // ===== Update =====
+  document.getElementById('form-update').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const out = document.getElementById('output-update');
+    await sendForm('/update', formData, out);
+    loadList();
+  });
+
+  // ===== Delete =====
+  document.getElementById('form-delete').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const out = document.getElementById('output-delete');
+    await sendForm('/delete', formData, out);
+    loadList();
+  });
+
+  // ===== List / Ward Overview =====
+  async function loadList(){
+    const tbody = document.getElementById('patient-table-body');
+    tbody.innerHTML = `<tr><td colspan="9" style="color:var(--muted); text-align:center; padding:24px;">Loading…</td></tr>`;
+    try{
+      const res = await fetch('/list');
+      const data = await res.json();
+      const lines = (data.output || "").trim().split("\n").filter(l => l.includes("ID:"));
+
+      if(lines.length === 0){
+        tbody.innerHTML = `<tr><td colspan="9" style="color:var(--muted); text-align:center; padding:24px;">No patients in the system yet.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = "";
+      lines.forEach(line => {
+        // line looks like: ID:101|NAME:John_Doe|PHONE:...|AGE:...|DISEASE:...|DOCTOR:...|ROOM:...|DATE:...|STATUS:...
+        const parts = {};
+        line.split("|").forEach(chunk => {
+          const [key, val] = chunk.split(":");
+          parts[key] = val;
+        });
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="id-mono">#${parts.ID}</td>
+          <td>${(parts.NAME || "").replace(/_/g, " ")}</td>
+          <td>${parts.AGE}</td>
+          <td>${(parts.DISEASE || "").replace(/_/g, " ")}</td>
+          <td>${(parts.DOCTOR || "").replace(/_/g, " ")}</td>
+          <td>${parts.ROOM}</td>
+          <td>${parts.DATE}</td>
+          <td><span class="status-pill status-${parts.STATUS}">${parts.STATUS}</span></td>
+          <td>${parts.PHONE}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }catch(err){
+      tbody.innerHTML = `<tr><td colspan="9" style="color:var(--coral); text-align:center; padding:24px;">Could not load records (${err})</td></tr>`;
+    }
+  }
+
+  // Load the ward overview on first page load
+  loadList();
+</script>
+
+</body>
+</html>
