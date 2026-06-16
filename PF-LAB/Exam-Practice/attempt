@@ -1,0 +1,33 @@
+1.1 #include <stdio.h>
+
+int sum(int n){
+  if(n == 0){
+    return 0;
+  }
+
+  return n + sum(n - 1);
+}
+
+int main(){
+  printf("%d", sum(5));
+
+  return 0;
+}
+
+1.2 #include <stdio.h>
+
+int power(int x, int y){
+  if(x == 0 || y == 0){
+    return 1;
+  }
+  printf("\n%d", x);
+  return x * power(x, y-1);
+}
+
+int main(){
+  printf("\n%d", power(5, 5));
+
+  return 0;
+}
+
+1.3 
