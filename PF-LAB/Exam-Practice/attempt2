@@ -1,0 +1,118 @@
+turn lowercase
+#include <stdio.h>
+
+int main(){
+  char str[100] = "HElLO";
+  int i = 0;
+
+  while(str[i] != '\0'){
+    if(str[i] >= 'A' && str[i] <= 'Z'){
+      str[i] += 32;
+    }
+
+  i++;
+  }
+
+  printf("%s", str);
+  return 0;
+}
+
+turn cap
+#include <stdio.h>
+
+int main(){
+  char str[100] = "helLo";
+  int i = 0;
+
+  while(str[i] != '\0'){
+    if(str[i] >= 'a' && str[i] <= 'z'){
+      str[i] -= 32;
+    }
+
+  i++;
+  }
+
+  printf("%s", str);
+  return 0;
+}
+
+count vowels
+#include <stdio.h>
+
+int main() {
+    char str[100];
+    int i = 0, vowels = 0;
+    
+    printf("Enter a string: ");
+    fgets(str, 100, stdin);
+
+    while(str[i] != '\0') {
+        if(str[i]=='a'||str[i]=='e'||str[i]=='i'||str[i]=='o'||str[i]=='u'||
+       str[i]=='A'||str[i]=='E'||str[i]=='I'||str[i]=='O'||str[i]=='U'){
+            vowels++;
+        }
+        i++;
+    }
+
+    printf("%d", vowels);
+
+    return 0;
+}
+
+reversal:
+#include <stdio.h>
+
+int main() {
+    char str[100], rev[100];
+    int length = 0, i = 0, vowels = 0;
+    
+    printf("Enter a string: ");
+    fgets(str, 100, stdin);
+
+    while(str[length] != '\0') {
+      length++;
+    }
+
+    for(i = 0; i<length; i++){
+      rev[i] = str[length - i - 1];
+    }
+    
+    str[i] = '\0';
+    printf("%s", rev);
+
+    return 0;
+}
+
+palindrome:
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[100], rev[100];
+    int length = 0, i = 0, vowels = 0;
+    
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    while(str[length] != '\0') {
+      length++;
+    }
+
+    for(i = 0; i<length; i++){
+      rev[i] = str[length - i - 1];
+    }
+    
+    rev[i] = '\0';
+
+    if(strcmp(str, rev) == 0){
+      printf("\nPalindrome.");
+    } else {
+      printf("\nNot a Palindrome.");
+    }
+
+    printf("\nstr: %s", str);
+    printf("\nrev: %s", rev);
+
+    return 0;
+}
+
